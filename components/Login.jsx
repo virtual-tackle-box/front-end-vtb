@@ -16,16 +16,19 @@ const Login = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.loginContainer}>
                 <TextInput
+                    maxLength={12}
                     style={styles.input}
                     placeholder="Name"
                     value={name}
                     onChangeText={setName}
                 />
                 <TextInput
+                    maxLength={16}
                     style={styles.input}
                     placeholder="Password"
                     value={password}
                     onChangeText={setPassword}
+                    secureTextEntry={true}
                 />
                 <View style={styles.buttonContainer}>
 
@@ -45,8 +48,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'green'
     },
+    
     
     
     loginContainer: {
@@ -63,8 +66,8 @@ const styles = StyleSheet.create({
         width: 200,
         borderWidth: 1,
         padding: 10,
-        borderRadius: 5, // Add a border radius to the input fields
-        marginBottom: 10, // Add some spacing between input fields
+        borderRadius: 5, 
+        marginBottom: 10,
     },
 
     buttonContainer: {
