@@ -18,7 +18,7 @@ const Login = () => {
                 <TextInput
                     maxLength={12}
                     style={styles.input}
-                    placeholder="Name"
+                    placeholder="Username"
                     value={name}
                     onChangeText={setName}
                 />
