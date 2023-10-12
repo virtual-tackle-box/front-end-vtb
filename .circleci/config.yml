@@ -19,7 +19,7 @@ jobs:
           name: update dependencies
       - cypress/run-tests:
           start-command: 'CI=false npm start'
-          cypress-command: 'npx cypress start'
+          cypress-command: 'npx cypress run'
       - persist_to_workspace:
           root: ~/project
           paths:
