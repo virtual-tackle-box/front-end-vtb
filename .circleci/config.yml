@@ -13,16 +13,12 @@ jobs:
           pkg-manager: npm 
       - run:
           command: npm install
-          name: Install Dependencies
+          name: install dependencies 
       - run:
-          command: npx expo start
-          background: true
-          name: Start Expo Server
-      - run:
-          command: sleep 30 # Adjust the wait time as needed
-          name: Wait for Expo Server
+          command: npx expo install --fix
+          name: update dependencies
       - cypress/run-tests:
-          start-command: 'CI=false npx cypress open'
+          start-command: 'CI=false npm start'
           cypress-command: 'npx cypress run'
       - persist_to_workspace:
           root: ~/project
