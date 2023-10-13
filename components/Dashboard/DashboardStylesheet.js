@@ -16,6 +16,7 @@ const dashboardStyles = StyleSheet.create({
   },
 
   iconEl: {
+    flex: .3333,
     alignItems: 'center'
   },
 
