@@ -18,7 +18,7 @@ jobs:
           command: npx expo install --fix
           name: update dependencies
       - cypress/run-tests:
-          start-command: 'CI=false npm start'
+          start-command: 'npm start'
           cypress-command: 'npx cypress run'
       - persist_to_workspace:
           root: ~/project
