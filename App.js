@@ -1,4 +1,4 @@
-import Login from './components/Login/Login.jsx';
+import Login from './components/Login/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
