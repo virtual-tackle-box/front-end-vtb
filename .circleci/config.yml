@@ -22,12 +22,15 @@ jobs:
           command: expo start --web --non-interactive
           background: true
       - cypress/run-tests:
-          start-command: 'CI=false npm start'
           cypress-command: 'npm run cy:run --'
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-      workflows:
-        test_my_app:
-          jobs:
-            - build and test
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-and-test
+
+
+
+
+
