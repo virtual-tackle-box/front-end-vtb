@@ -1,23 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
 import Login from './components/Login/Login.jsx';
-import styles from './components/App/AppStyles.jsx'
+import styles from './components/App/AppStyles.jsx';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  
+  const handleLogin = (name,password) => {
+   
+}
+  
+  
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('./assets/tackleboxlogo.png')}
-          style={{ width: 350, height: 50 }}
-          resizeMode="contain"
-        />
-      </View>
-      <View style={styles.loginContainer}>
-        <Login />
-      </View>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Login'>
+          <Stack.Screen 
+            name='Login' 
+            component={Login}
+            options={{ headerShown: false }}
+            />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
+          
 
