@@ -1,20 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import Login from './components/Login';
+import { StyleSheet, View, Image, SafeAreaView } from 'react-native';
+import Login from './components/Login/Login.jsx';
+import styles from './components/App/AppStyles.jsx'
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <Login/>
+      <View style={styles.logoContainer}>
+        <Image
+          source={require('./assets/tackleboxlogo.png')}
+          style={{ width: 350, height: 50 }}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={styles.loginContainer}>
+        <Login />
+      </View>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
