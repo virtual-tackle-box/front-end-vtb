@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, Image } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import styles from './LoginStyles'
+import MapView from 'react-native-maps'
 
 function Login(){
 
@@ -54,6 +55,9 @@ function Login(){
                         title="Login" 
                         onPress={() => handleLogin(name,password)}/>
                 </View>
+            </View>
+            <View style={styles.mapcontainer}>
+                <MapView styles={styles.map}/>
             </View>
         </View>
     )
