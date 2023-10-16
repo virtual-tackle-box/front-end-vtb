@@ -56,8 +56,7 @@ export default function TestMap() {
 		answer = JSON.stringify(location);
 	}
 
-	const mapView =
-		onWeb === false && location ? (
+	const mapView = onWeb === false && location ? (
 			<View style={styles.container}>
 				<MapView
 					ref={mapRef}
