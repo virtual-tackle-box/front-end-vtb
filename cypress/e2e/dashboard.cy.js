@@ -26,7 +26,7 @@ describe('Dashboard', () => {
         // Assert each text contains the correct text
         cy.wrap($iconContainer)
           .find('[data-testid^=icon-text]')
-          .should('have.text', ['Map', 'Add', 'Logbook'][index]); // Replace with your expected text values
+          .should('have.text', ['Map', 'Add', 'Logbook'][index]);
       });
   });
 });
