@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TextInput, Button, Image } from "react-native";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import styles from './LoginStyles'
 
 function Login(){
@@ -8,12 +9,14 @@ function Login(){
     const [ name, setName ] = useState('');
     const [ password, setPassword ] = useState('');
 
+    const navigation = useNavigation();
+
     function handleLogin(name,password){
         if(!name || !password){
             return;
         }
         else{
-            
+            navigation.navigate("Dashboard")
         }
     }
 
