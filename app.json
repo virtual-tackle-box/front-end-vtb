@@ -14,6 +14,15 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Virtual Tackle Box to use your location.",
+          "locationWhenInUsePermission": "Allow Virtual Tackle Box to use your location."
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.vtb"
