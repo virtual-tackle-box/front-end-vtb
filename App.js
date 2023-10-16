@@ -6,9 +6,6 @@ import Dashboard from './components/DashBoard/Dashboard';
 const Stack = createStackNavigator();
 
 export default function App() {
-
-  
-  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
@@ -30,8 +27,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-  
-  
-  
-          
-
