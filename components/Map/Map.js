@@ -61,6 +61,7 @@ export default function TestMap() {
 				<MapView
 					ref={mapRef}
 					style={styles.map}
+          mapType = 'satellite'
 					
 				>
 					<Marker
@@ -68,6 +69,7 @@ export default function TestMap() {
 							latitude: location.coords.latitude,
 							longitude: location.coords.longitude,
 						}}
+            draggable
 					/>
 				</MapView>
 			</View>
