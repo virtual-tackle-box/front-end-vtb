@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
 
 const styles = StyleSheet.create({
     container: {
@@ -9,13 +10,13 @@ const styles = StyleSheet.create({
     },
 
     logoContainer: {
-        flex: .4, 
+        flex: .2, 
         justifyContent: 'center',
         alignItems: 'center',
       },
     
     loginContainer: {
-        flex: .6,
+        flex: .2,
         borderRadius: 10,
         padding: 10,
         alignItems: 'center',
@@ -48,6 +49,18 @@ const styles = StyleSheet.create({
         width: 350,
         height: 50,
     },
+    mapcontainer: { 
+                flex: .6,
+                backgroundColor: '#fff',
+                alignItems: 'center',
+                justifyContent: 'center'
+            ,
+            map: {
+                width: Dimensions.get('window').width,
+                heigth: Dimensions.get('window').height,
+            
+            }
+        }
 
 })
 

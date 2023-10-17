@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import styles from './LoginStyles'
 
+
 function Login(){
 
     const [ name, setName ] = useState('');
