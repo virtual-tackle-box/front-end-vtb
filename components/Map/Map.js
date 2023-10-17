@@ -8,6 +8,7 @@ import * as Location from "expo-location";
 export default function TestMap() {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
+	const [markerPosition, setMarkerPosition] = useState(null);
 
 	let mapRef = useRef(null);
 	let Marker;
@@ -44,10 +45,10 @@ export default function TestMap() {
 			}
 			let location = await Location.getCurrentPositionAsync({});
 			setLocation(location);
+			setMarkerPosition(location);
 		}
 		getLocation();
 	}, []);
-
 
 	let answer = "Waiting for location...";
 	if (errorMsg) {
@@ -56,20 +57,20 @@ export default function TestMap() {
 		answer = JSON.stringify(location);
 	}
 
-	const mapView = onWeb === false && location ? (
+	const mapView =
+		onWeb === false && location ? (
 			<View style={styles.container}>
-				<MapView
-					ref={mapRef}
-					style={styles.map}
-          mapType = 'satellite'
-					
-				>
+				<MapView ref={mapRef} style={styles.map} mapType="satellite">
 					<Marker
 						coordinate={{
 							latitude: location.coords.latitude,
 							longitude: location.coords.longitude,
 						}}
-            draggable
+						draggable
+						onDragEnd={(e) => {
+							console.log(e.nativeEvent.coordinate);
+							setMarkerPosition(e.nativeEvent.coordinate);
+						}}
 					/>
 				</MapView>
 			</View>
