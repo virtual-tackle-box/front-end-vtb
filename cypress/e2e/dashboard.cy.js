@@ -1,6 +1,9 @@
 describe('Dashboard', () => {
   beforeEach(() => {
     cy.visit('http://localhost:19006');
+    cy.get('[data-testid="userName-input"]').type('Josh');
+    cy.get('[data-testid="password-input"]').type('PW');
+    cy.get('[data-testid="login-button"]').click();
     cy.get('[data-testid="dashboard-container"]').as('dashboardContainer');
   });
 
@@ -23,7 +26,7 @@ describe('Dashboard', () => {
         // Assert each text contains the correct text
         cy.wrap($iconContainer)
           .find('[data-testid^=icon-text]')
-          .should('have.text', ['Map', 'Add', 'Logbook'][index]); // Replace with your expected text values
+          .should('have.text', ['Map', 'Add', 'Logbook'][index]);
       });
   });
 });

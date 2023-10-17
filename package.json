@@ -4,14 +4,16 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web"
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/stack": "^6.3.18",
+    "cypress": "^13.3.1",
     "expo": "~49.0.13",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
@@ -23,8 +25,7 @@
     "expo-location": "~16.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "cypress": "^13.3.1"
+    "@babel/core": "^7.20.0"
   },
   "private": true
 }
