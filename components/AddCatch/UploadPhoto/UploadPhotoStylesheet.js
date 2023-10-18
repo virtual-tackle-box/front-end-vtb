@@ -7,7 +7,6 @@ export const uploadPhotoStylesheet = StyleSheet.create({
   },
 
   cameraTopBar: {
-    // backgroundColor: '#66b3ff',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -23,10 +22,9 @@ export const uploadPhotoStylesheet = StyleSheet.create({
     justifyContent: 'flex-end',
     gap: 30,
     alignItems: 'center'
-    // backgroundColor: '#66b3ff'
   },
 
-  manageBtn: {
+  button: {
     width: 80,
     height: 24,
     backgroundColor: 'lightgrey',
@@ -37,9 +35,12 @@ export const uploadPhotoStylesheet = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  submitButton: {
+    backgroundColor: '#6ccc60',
+    marginTop: 'auto'
+  },
+
   cameraContainer: {
-    position: 'absolute',
-    top: 200,
     width: '90%',
     height: 410,
     zIndex: 1,
@@ -53,7 +54,9 @@ export const uploadPhotoStylesheet = StyleSheet.create({
       width: 6,
       height: 6
     },
-    shadowOpacity: 0.75
+    shadowOpacity: 0.75,
+    borderWidth: '2px',
+    borderColor: 'green',
   },
 
   camera: {
@@ -64,8 +67,6 @@ export const uploadPhotoStylesheet = StyleSheet.create({
     alignSelf: 'center'
   },
 
-  captureButton: {},
-
   fixedRatio: {
     flex: 1,
     aspectRatio: 1
@@ -74,7 +75,6 @@ export const uploadPhotoStylesheet = StyleSheet.create({
   mediaContainer: {
     height: 800,
     padding: 20
-    // backgroundColor: '#66b3ff',
   },
 
   image: {

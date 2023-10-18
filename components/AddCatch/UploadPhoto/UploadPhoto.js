@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
+  ScrollView,
   Text,
   Image,
   TouchableOpacity,
@@ -32,7 +33,7 @@ export default function CameraScreen() {
     setGalleryPermission(imagePermission.status === 'granted');
 
     if (!cameraPermission && !galleryPermission) {
-      /* alert('Permission for media access needed.'); */
+      // alert('Permission for media access needed.');
     }
   }
 
@@ -47,7 +48,7 @@ export default function CameraScreen() {
       // make a View that overlays the camera window
       // set it to animate to a dark opacity of grey
       // fade out to 0 opacity
-      setCameraOpen(false)
+      setCameraOpen(false);
       setImageUri(photo.uri);
     }
   }
@@ -91,39 +92,42 @@ export default function CameraScreen() {
   );
   return (
     <SafeAreaView>
-      <View style={styles.uploadPhoto}>
-        {/* TOP NAV BAR */}
-        <View testID='camera-view-top-nav-bar' style={styles.cameraTopBar}>
-          <Button title={'Cancel'} color={'black'}></Button>
-          <Text style={{ fontSize: 20, fontWeight: '600' }}>Select Photo</Text>
-          <Button title={'Skip'} color={'black'}></Button>
-        </View>
-
-        {/* CAMERA MANAGEMENT OPTIONS */}
-        <View style={styles.cameraManagementOptions}>
-          <TouchableOpacity onPress={pickImage} style={styles.manageBtn}>
-            <Text>Gallery</Text>
-          </TouchableOpacity>
-          <Icon
-            name='camera'
-            style={{ fontSize: 30, paddingRight: 35 }}
-            onPress={() => setCameraOpen(prev => !prev)}
-          ></Icon>
-        </View>
-
-        {/* CAMERA COMPONENT */}
-        {cameraOpen && cameraComponent}
-
-        {/* MEDIA VIEWING CONTAINER */}
-        <View style={styles.mediaContainer}>
-          {imageUri && (
-            <View>
+      <ScrollView style={{ height: '100%' }}>
+        <View style={styles.uploadPhoto}>
+          {/* TOP NAV BAR */}
+          <View testID='camera-view-top-nav-bar' style={styles.cameraTopBar}>
+            <Button title={'Cancel'} color={'black'}></Button>
+            <Text style={{ fontSize: 20, fontWeight: '600' }}>
+              Select Photo
+            </Text>
+            <Button title={'Skip'} color={'black'}></Button>
+          </View>
+          {/* CAMERA MANAGEMENT OPTIONS */}
+          <View style={styles.cameraManagementOptions}>
+            <TouchableOpacity onPress={pickImage} style={styles.button}>
+              <Text>Gallery</Text>
+            </TouchableOpacity>
+            <Icon
+              name='camera'
+              style={{ fontSize: 30, paddingRight: 35 }}
+              onPress={() => setCameraOpen(prev => !prev)}
+            ></Icon>
+          </View>
+          {/* CAMERA COMPONENT */}
+          {cameraOpen && cameraComponent}
+          {/* {cameraOpen && <Text>WTF</Text>} */}
+          {/* MEDIA VIEWING CONTAINER */}
+          {imageUri && !cameraOpen && (
+            <View style={styles.mediaContainer}>
               <Image source={{ uri: imageUri }} style={styles.image} />
-              <Text></Text>
             </View>
           )}
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
+
+/* <TouchableOpacity style={[styles.button, styles.submitButton]}>
+        <Text>Submit</Text>
+     </TouchableOpacity> */
