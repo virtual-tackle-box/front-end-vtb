@@ -1,7 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 const dashboardStyles = StyleSheet.create({
+  dashContainer: {
+    flex: 1,
+  },
+
+  mapContainer: {
+    flex: .9
+  },
+
   container: {
+    flex: .1,
     flexDirection: 'row',
     justifyContent: 'space-around',
 
@@ -22,7 +31,11 @@ const dashboardStyles = StyleSheet.create({
 
   text: {
     color: 'white'
-  }
+  },
+
+  
+
+  
 });
 
 
