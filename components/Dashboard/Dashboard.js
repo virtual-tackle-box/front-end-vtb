@@ -65,3 +65,16 @@ export default function Dashboard() {
 
   return dashboard;
 }
+
+// const photo = {
+//   assetId: null,
+//   base64: null,
+//   duration: null,
+//   exif: null,
+//   fileName: null,
+//   fileSize: 5765169,
+//   height: 3026,
+//   type: 'image',
+//   uri: 'file:///var/mobile/Containers/Data/Application/5651B8D3-2E80-47BD-8E97-E774C6C34777/Library/Caches/ExponentExperienceData/%2540anonymous%252Fvtb-3b7d19a1-a787-494c-8528-3863bc90c31c/ImagePicker/72AEA194-B1E0-48DF-BCF6-E84A0035EBB3.jpg',
+//   width: 3024
+// };

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/stack": "^6.3.18",
     "cypress": "^13.3.1",
@@ -25,7 +27,8 @@
     "expo-location": "~16.1.0",
     "expo-camera": "~13.4.4",
     "expo-permissions": "~14.2.1",
-    "expo-image-picker": "~14.3.2"
+    "expo-image-picker": "~14.3.2",
+    "react-native-svg": "^13.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

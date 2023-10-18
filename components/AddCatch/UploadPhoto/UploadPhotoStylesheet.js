@@ -2,49 +2,67 @@ import { StyleSheet } from 'react-native';
 
 export const uploadPhotoStylesheet = StyleSheet.create({
   uploadPhoto: {
-    flex: 1,
-    borderColor: 'blue',
-    borderWidth: '2px'
+    position: 'relative',
+    flex: 1
+  },
+
+  cameraTopBar: {
+    // backgroundColor: '#66b3ff',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
+    height: 80
+  },
+
+  cameraManagementOptions: {
+    height: 100,
+    width: '100%',
+
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: 30,
+    alignItems: 'center',
+    // backgroundColor: '#66b3ff'
+  },
+
+  manageBtn: {
+    width: 80,
+    height: 24,
+    backgroundColor: 'lightgrey',
+    borderColor: 'black',
+    borderWidth: '1px',
+    borderRadius: '5px',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   cameraContainer: {
-    flex: 1,
-    width: '100%',
     position: 'absolute',
-    bottom: 0,
-    borderColor: 'blue',
-    borderWidth: '2px'
+    top: 200,
+    width: '100%',
+    height: 425,
+    zIndex: 1
   },
 
   camera: {
-    flex: 1,
-    flexDirection: 'row'
+    height: 420,
+
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
+
+  captureButton: {},
 
   fixedRatio: {
     flex: 1,
     aspectRatio: 1
   },
-  button: {
-    flex: 0.1,
-    padding: 10,
-    alignSelf: 'flex-end',
-    alignItems: 'center'
-  },
 
-  cameraTopBar: {
-    flex: 1,
-    position: 'absolute',
-    top: 100,
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px',
-
-    borderColor: 'blue',
-    borderWidth: '2px',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%'
+  mediaContainer: {
+    height: 800,
+    padding: 20
+    // backgroundColor: '#66b3ff'
   }
 });
 
