@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
@@ -12,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { uploadPhotoStylesheet as styles } from './UploadPhotoStylesheet';
 
-export default function CameraScreen() {
+export default function CameraScreen({ updateForm }) {
   const [cameraPermission, setCameraPermission] = useState(false);
   const [galleryPermission, setGalleryPermission] = useState(false);
 
@@ -46,6 +41,7 @@ export default function CameraScreen() {
       // fade out to 0 opacity
       setCameraOpen(false);
       setImageUri(photo.uri);
+      updateForm('url', photo.uri);
     }
   }
 
@@ -59,6 +55,7 @@ export default function CameraScreen() {
 
     if (!result.canceled) {
       setImageUri(result.assets?.[0].uri || result.uri);
+      updateForm('url', result.assets?.[0].uri || result.uri);
     }
   }
 
