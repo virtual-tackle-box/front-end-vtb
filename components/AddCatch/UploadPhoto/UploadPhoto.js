@@ -5,10 +5,13 @@ import {
   Image,
   TouchableOpacity,
   Button,
-  StyleSheet
+  StyleSheet,
+  SafeAreaView
 } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { uploadPhotoStylesheet as styles } from './UploadPhotoStylesheet';
 
 export default function CameraScreen() {
@@ -16,41 +19,35 @@ export default function CameraScreen() {
   const [galleryPermission, setGalleryPermission] = useState(false);
 
   const [camera, setCamera] = useState(null);
+  const [cameraOpen, setCameraOpen] = useState(false);
   const [imageUri, setImageUri] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   async function getPermissions() {
     const cameraPerms = await Camera.requestCameraPermissionsAsync();
-    // const cameraPerms = await requestPermission();
-    console.log('camera permissions: ', cameraPerms);
-
     setCameraPermission(cameraPerms.status === 'granted');
 
     const imagePermission = await ImagePicker.getMediaLibraryPermissionsAsync();
-    console.log('Image permission object: ', imagePermission);
-
     setGalleryPermission(imagePermission.status === 'granted');
 
     if (!cameraPermission && !galleryPermission) {
-      alert('Permission for media access needed.');
+      /* alert('Permission for media access needed.'); */
     }
   }
 
   useEffect(() => {
-    getPermissions();
+    if (!camera) getPermissions();
   }, []);
 
-  const takePicture = async () => {
+  async function takePicture() {
     if (camera) {
-      // const options = { quality: 0.5, base64: true };
       const photo = await camera.takePictureAsync(null);
-      console.log('this is the image data: ', photo);
-      console.log('this is the data.uri:', photo.uri);
+      console.log('Pic taken: ', photo);
       setImageUri(photo.uri);
     }
-  };
+  }
 
-  const pickImage = async () => {
+  async function pickImage() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -58,22 +55,14 @@ export default function CameraScreen() {
       quality: 1
     });
 
-    console.log('Result of pick image from gallery: ', result);
     if (!result.canceled) {
       setImageUri(result.uri);
     }
-  };
+  }
 
-  return (
-    <View style={styles.uploadPhoto}>
-      <View testID='camera-view-top-nav-bar' style={styles.cameraTopBar}>
-        <Button title={'Cancel'}></Button>
-        <Text style={{ fontSize: '20px', fontWeight: '600'}}>Select Photo</Text>
-        <Button title={'Skip'}></Button>
-      </View>
-
-      <View style={styles.cameraContainer}>
-        {/* CAMERA COMPONENT */}
+  const cameraComponent = cameraOpen ? (
+    <View style={styles.cameraContainer}>
+      {/* CAMERA COMPONENT */}
       <View style={styles.camera}>
         <Camera
           ref={ref => setCamera(ref)}
@@ -81,64 +70,57 @@ export default function CameraScreen() {
           type={type}
           ratio={'1:1'}
         />
-      </View>
-
-        <Button title={'Take Picture'} onPress={takePicture} />
-        <Button title={'Gallery'} onPress={pickImage} />
-
-        {imageUri && <Image source={{ uri: imageUri }} style={{ flex: 1 }} />}
+        <TouchableOpacity
+          style={{ width: 'auto', justifyContent: 'center' }}
+          onPress={takePicture}
+        >
+          <Icon
+            name='circle-thin'
+            color={'lightgrey'}
+            style={{ fontSize: 60, alignSelf: 'center' }}
+          ></Icon>
+        </TouchableOpacity>
       </View>
     </View>
+  ) : (
+    <View></View>
   );
 
-  // const [type, setType] = useState(CameraType.back);
-  // const [permission, requestPermission] = Camera.useCameraPermissions();
-  // const cameraRef = useRef(null);
+  return (
+    <SafeAreaView>
+      <View style={styles.uploadPhoto}>
+        {/* TOP NAV BAR */}
+        <View testID='camera-view-top-nav-bar' style={styles.cameraTopBar}>
+          <Button title={'Cancel'} color={'black'}></Button>
+          <Text style={{ fontSize: 20, fontWeight: '600' }}>Select Photo</Text>
+          <Button title={'Skip'} color={'black'}></Button>
+        </View>
 
-  // // useEffect(() => {
-  // //   getCameraPermission();
-  // // }, []);
+        {/* CAMERA MANAGEMENT OPTIONS */}
+        <View style={styles.cameraManagementOptions}>
+          <TouchableOpacity onPress={pickImage} style={styles.manageBtn}>
+            <Text>Manage</Text>
+          </TouchableOpacity>
+          <Icon
+            name='camera'
+            style={{ fontSize: 30, paddingRight: 35 }}
+            onPress={() => setCameraOpen(prev => !prev)}
+          ></Icon>
+        </View>
 
-  // // async function takePicture() {
-  // //   if (cameraRef.current) {
-  // //     const options = { quality: 0.5, base64: true };
-  // //     const photo = await cameraRef.current.takePictureAsync(options);
-  // //     console.log(photo);
-  // //   }
-  // // }
-  // if (!permission) {
-  //   // Camera permissions are still loading
-  //   return <View />;
-  // }
+        {/* CAMERA COMPONENT */}
+        {cameraComponent}
 
-  // if (!permission.granted) {
-  //   // Camera permissions are not granted yet
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={{ textAlign: 'center' }}>
-  //         We need your permission to show the camera
-  //       </Text>
-  //       <Button onPress={requestPermission} title='grant permission' />
-  //     </View>
-  //   );
-  // }
-
-  // function toggleCameraType() {
-  //   setType(current =>
-  //     current === CameraType.back ? CameraType.front : CameraType.back
-  //   );
-  // }
-
-  // return (
-  //   <View style={styles.container}>
-  //     <Camera style={styles.camera} type={type}>
-  //       <View style={styles.buttonContainer}>
-  //         <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-  //           <Text style={styles.text}>Flip Camera</Text>
-  //         </TouchableOpacity>
-  //       </View>
-  //     </Camera>
-  //   </View>
-  // );
+        {/* MEDIA VIEWING CONTAINER */}
+        <View style={styles.mediaContainer}>
+          {imageUri && (
+            <Image
+              source={{ uri: imageUri }}
+              style={{ height: 120, width: 120 }}
+            />
+          )}
+        </View>
+      </View>
+    </SafeAreaView>
+  );
 }
-
