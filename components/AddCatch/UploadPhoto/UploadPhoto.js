@@ -8,7 +8,8 @@ import {
   StyleSheet,
   SafeAreaView
 } from 'react-native';
-import { Camera, CameraType } from 'expo-camera';
+
+import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -42,7 +43,11 @@ export default function CameraScreen() {
   async function takePicture() {
     if (camera) {
       const photo = await camera.takePictureAsync(null);
-      console.log('Pic taken: ', photo);
+      // give feedback to user that pic was taken:
+      // make a View that overlays the camera window
+      // set it to animate to a dark opacity of grey
+      // fade out to 0 opacity
+      setCameraOpen(false)
       setImageUri(photo.uri);
     }
   }
@@ -56,11 +61,11 @@ export default function CameraScreen() {
     });
 
     if (!result.canceled) {
-      setImageUri(result.uri);
+      setImageUri(result.assets?.[0].uri || result.uri);
     }
   }
 
-  const cameraComponent = cameraOpen ? (
+  const cameraComponent = (
     <View style={styles.cameraContainer}>
       {/* CAMERA COMPONENT */}
       <View style={styles.camera}>
@@ -71,21 +76,19 @@ export default function CameraScreen() {
           ratio={'1:1'}
         />
         <TouchableOpacity
-          style={{ width: 'auto', justifyContent: 'center' }}
+          style={{ width: 'auto', justifyContent: 'center', marginTop: 5 }}
           onPress={takePicture}
         >
           <Icon
             name='circle-thin'
             color={'lightgrey'}
             style={{ fontSize: 60, alignSelf: 'center' }}
+            // move icon down a little bit
           ></Icon>
         </TouchableOpacity>
       </View>
     </View>
-  ) : (
-    <View></View>
   );
-
   return (
     <SafeAreaView>
       <View style={styles.uploadPhoto}>
@@ -99,7 +102,7 @@ export default function CameraScreen() {
         {/* CAMERA MANAGEMENT OPTIONS */}
         <View style={styles.cameraManagementOptions}>
           <TouchableOpacity onPress={pickImage} style={styles.manageBtn}>
-            <Text>Manage</Text>
+            <Text>Gallery</Text>
           </TouchableOpacity>
           <Icon
             name='camera'
@@ -109,15 +112,15 @@ export default function CameraScreen() {
         </View>
 
         {/* CAMERA COMPONENT */}
-        {cameraComponent}
+        {cameraOpen && cameraComponent}
 
         {/* MEDIA VIEWING CONTAINER */}
         <View style={styles.mediaContainer}>
           {imageUri && (
-            <Image
-              source={{ uri: imageUri }}
-              style={{ height: 120, width: 120 }}
-            />
+            <View>
+              <Image source={{ uri: imageUri }} style={styles.image} />
+              <Text></Text>
+            </View>
           )}
         </View>
       </View>
