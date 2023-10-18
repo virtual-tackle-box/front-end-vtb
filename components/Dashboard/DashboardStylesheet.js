@@ -2,15 +2,15 @@ import { StyleSheet } from 'react-native';
 
 const dashboardStyles = StyleSheet.create({
   dashContainer: {
-    flex: 1,
+    flex: 1
   },
 
   mapContainer: {
-    flex: .9
+    flex: 0.9
   },
 
   container: {
-    flex: .1,
+    flex: 0.1,
     flexDirection: 'row',
     justifyContent: 'space-around',
 
@@ -25,18 +25,13 @@ const dashboardStyles = StyleSheet.create({
   },
 
   iconEl: {
-    flex: .3333,
+    flex: 0.3333,
     alignItems: 'center'
   },
 
   text: {
     color: 'white'
-  },
-
-  
-
-  
+  }
 });
 
-
-export default dashboardStyles
+export default dashboardStyles;

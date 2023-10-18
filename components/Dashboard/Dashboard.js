@@ -1,20 +1,27 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import dashboardStyles from './DashboardStylesheet';
-import UserMap from '../Map/UserMap'
-import { useState } from 'react'
+import UserMap from '../Map/UserMap';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Dashboard() {
-  const [showMarker, setShowMarker] = useState(false)
-  
+  const [showMarker, setShowMarker] = useState(false);
+  const navigation = useNavigation();
+
   function toggleMarker() {
-    setShowMarker(!showMarker)
+    setShowMarker(prev => !prev);
   }
-  
+
+  function toggleForm() {
+    navigation.navigate('AddCatch');
+  }
+
   const dashboard = (
     <View style={dashboardStyles.dashContainer}>
       <View style={dashboardStyles.mapContainer}>
         <UserMap showMarker={showMarker} />
+        <Button title='Confirm' onPress={toggleForm} />
       </View>
       <View testID='dashboard-container' style={dashboardStyles.container}>
         {/* Map Icon */}
@@ -25,15 +32,29 @@ export default function Dashboard() {
           </Text>
         </View>
         {/* Add Icon */}
-        <TouchableOpacity testID='dashboard-icon' style={dashboardStyles.iconEl} onPress={() => toggleMarker()}>
-          <Icon testID='fa-icon-svg-plus' name='plus' size={35} color='grey'></Icon>
+        <TouchableOpacity
+          testID='dashboard-icon'
+          style={dashboardStyles.iconEl}
+          onPress={() => toggleMarker()}
+        >
+          <Icon
+            testID='fa-icon-svg-plus'
+            name='plus'
+            size={35}
+            color='grey'
+          ></Icon>
           <Text testID='icon-text' style={dashboardStyles.text}>
             Add
           </Text>
         </TouchableOpacity>
         {/* Logbook Icon */}
         <View testID='dashboard-icon' style={dashboardStyles.iconEl}>
-          <Icon testID='fa-icon-logbook' name='book' size={35} color='grey'></Icon>
+          <Icon
+            testID='fa-icon-logbook'
+            name='book'
+            size={35}
+            color='grey'
+          ></Icon>
           <Text testID='icon-text' style={dashboardStyles.text}>
             Logbook
           </Text>

@@ -1,7 +1,5 @@
-import CameraScreen from "./UploadPhoto/UploadPhoto";
+import CameraScreen from './UploadPhoto/UploadPhoto';
 
 export default function AddCatch() {
-  return (
-    <CameraScreen></CameraScreen>
-  )
+  return <CameraScreen></CameraScreen>;
 }
