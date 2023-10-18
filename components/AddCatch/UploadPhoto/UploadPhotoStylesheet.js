@@ -7,8 +7,7 @@ export const uploadPhotoStylesheet = StyleSheet.create({
   },
 
   cameraTopBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
     height: 80
@@ -44,8 +43,6 @@ export const uploadPhotoStylesheet = StyleSheet.create({
     width: '90%',
     height: 410,
     zIndex: 1,
-    borderColor: 'green',
-    borderWidth: '1px',
     alignSelf: 'center',
     borderRadius: 6,
     backgroundColor: 'white',
@@ -55,8 +52,8 @@ export const uploadPhotoStylesheet = StyleSheet.create({
       height: 6
     },
     shadowOpacity: 0.75,
-    borderWidth: '2px',
-    borderColor: 'green',
+    borderWidth: '1px',
+    borderColor: 'grey'
   },
 
   camera: {
