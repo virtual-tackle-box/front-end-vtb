@@ -10,7 +10,10 @@ import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 import AddSpot from './AddSpot/AddSpot';
 
 // check in with Banjo about passing lat and lon in
-export default function AddCatch({ lat, lon }) {
+export default function AddCatch({route}) {
+  const {lat,lon} = route.params;
+  console.log("LAT",lat)
+  console.log("LON",lon)
   const [formData, setFormData] = useState({
     spot: '',
     lat,
