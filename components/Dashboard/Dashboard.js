@@ -5,7 +5,8 @@ import UserMap from "../Map/UserMap";
 import { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import TestLogBook from "../TestLogBook/TestLogBook";
-import CustomTabBar from '../CustomTabBar/CustomTabBar'
+import CustomTabBar from "../CustomTabBar/CustomTabBar";
+import AddButton from "../AddButton/AddButton";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,21 +48,27 @@ export default function Dashboard() {
 	//   </View>
 	// );
 
-
-
 	const dashboard = (
-		<Tab.Navigator initialRouteName={"map"} tabBar={props => <CustomTabBar {...props} />}>
+		<Tab.Navigator
+			initialRouteName={"map"}
+			tabBar={(props) => <CustomTabBar {...props} />}
+		>
 			<Tab.Screen
 				name="map"
 				component={UserMap}
 				options={{ headerShown: false }}
-        
 			/>
 
 			<Tab.Screen
 				name="book"
 				component={TestLogBook}
-				options={{ headerShown: false}}
+				options={{ headerShown: false }}
+			/>
+
+			<Tab.Screen
+				name="Fake"
+				component={UserMap}
+				options={{ headerShown: false }}
 			/>
 		</Tab.Navigator>
 	);
