@@ -1,14 +1,21 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
-
-import { StyleSheet, Text, View, Dimensions, Platform } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+	StyleSheet,
+	Text,
+	View,
+	Dimensions,
+	Platform,
+	Animated,
+} from "react-native";
 import { styles } from "./UserMapStylesheet";
 import * as Location from "expo-location";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function UserMap({ showMarker }) {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [markerPosition, setMarkerPosition] = useState(null);
+	const [slideInAnim] = useState(new Animated.Value(0));
 
 	let mapRef = useRef(null);
 	let markerRef = useRef(null);
@@ -67,16 +74,34 @@ export default function UserMap({ showMarker }) {
 		getLocation();
 	}, []);
 
-	let answer = "Waiting for location...";
-	if (errorMsg) {
-		answer = errorMsg;
-	} else if (location) {
-		answer = JSON.stringify(location);
-	}
+	const isFocused = useIsFocused();
+
+	useEffect(() => {
+		if (isFocused) {
+			Animated.timing(slideInAnim, {
+				toValue: 1,
+				duration: 400,
+				useNativeDriver: true,
+			}).start();
+		} else {
+			slideInAnim.setValue(0);
+		}
+	}, [isFocused]);
+
+	const slideInStyle = {
+		transform: [
+			{
+				translateX: slideInAnim.interpolate({
+					inputRange: [0, 1],
+					outputRange: [300, 0],
+				}),
+			},
+		],
+	};
 
 	const mapView =
 		onWeb === false && location ? (
-			<View style={styles.container}>
+			<Animated.View style={[styles.container, slideInStyle]}>
 				<MapView ref={mapRef} style={styles.map} mapType="satellite">
 					{showMarker && (
 						<Marker
@@ -97,7 +122,7 @@ export default function UserMap({ showMarker }) {
 						</Marker>
 					)}
 				</MapView>
-			</View>
+			</Animated.View>
 		) : (
 			<View style={styles.container}>
 				<Text>Map not supported in Web Mode!</Text>
