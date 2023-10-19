@@ -14,12 +14,12 @@ export default function AddButton(){
     const openMenu = () =>{
         setMenuOpen(true);
         Animated.timing(addFish, {
-            toValue: 200,
+            toValue: 130,
             duration: 200,
             useNativeDriver: false,
         }).start()
         Animated.timing(addLure, {
-            toValue: 130,
+            toValue: 200,
             duration: 200,
             useNativeDriver: false,
         }).start()
@@ -43,12 +43,12 @@ export default function AddButton(){
         <View style={styles.mainContainer}>
             <Animated.View style={[styles.circleButton, {bottom: addFish}]}>
                 <TouchableOpacity>
-                    <Icon testID='fish-fins-icon' name='book' size={35} color='black'/>
+                    <Icon testID='fish-fins-icon' name='book' size={35} color='white'/>
                 </TouchableOpacity>
             </Animated.View>
             <Animated.View style={[styles.circleButton, {bottom: addLure}]}>
                 <TouchableOpacity>
-                    <Icon testID='lure-icon' name='superpowers' size={35} color='black'/>
+                    <Icon testID='lure-icon' name='superpowers' size={35} color='white'/>
                 </TouchableOpacity>
             </Animated.View>
             
@@ -59,7 +59,7 @@ export default function AddButton(){
             }
             }
             >
-                <Icon testID='plus-icon' name={isMenuOpen ? 'minus' : 'plus'} size={40} color='black'></Icon>
+                <Icon testID='plus-icon' name={isMenuOpen ? 'minus' : 'plus'} size={40} color='white'></Icon>
             </TouchableOpacity>
         </View>
     )

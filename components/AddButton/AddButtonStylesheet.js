@@ -10,13 +10,15 @@ export const styles = StyleSheet.create({
     },
 
     circleButton: {
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         width: 60,
         height: 60,
         position: 'absolute',
         bottom: 40,
         right: 190,
         borderRadius: 30,
+        borderWidth: 2,
+        borderColor: 'white',
         alignItems: 'center',
         justifyContent: 'center'
     }
