@@ -14,64 +14,103 @@ const Tab = createBottomTabNavigator();
 export default function Dashboard() {
   const [showMarker, setShowMarker] = useState(false);
   const navigation = useNavigation();
+  console.log( "Show marker in dashboard", showMarker)
+  const [markerPosition, setMarkerPosition] = useState('')
 
-  function toggleMarker() {
-    setShowMarker(prev => !prev);
-  }
+  console.log("MARKER POSITION IN DASH", markerPosition)
 
   function toggleForm() {
-    navigation.navigate('AddCatch');
+	console.log("MARKER POSITION IN TOGGLE", markerPosition)
+	const lat = markerPosition.latitude;
+	const lon = markerPosition.longitude;
+    navigation.navigate('AddCatch', {lat: lat,
+	lon: lon})
   }
 
-  const dashboard = (
-    <View style={dashboardStyles.dashContainer}>
-      <View style={dashboardStyles.mapContainer}>
-        <UserMap showMarker={showMarker} />
-        <Button title='Confirm' onPress={toggleForm} />
-      </View>
-      <View testID='dashboard-container' style={dashboardStyles.container}>
-        {/* Map Icon */}
-        <View testID='dashboard-icon' style={dashboardStyles.iconEl}>
-          <Icon testID='fa-icon-map' name='map' size={35} color='grey'></Icon>
-          <Text testID='icon-text' style={dashboardStyles.text}>
-            Map
-          </Text>
-        </View>
-        {/* Add Icon */}
-        <TouchableOpacity
-          testID='dashboard-icon'
-          style={dashboardStyles.iconEl}
-          onPress={() => toggleMarker()}
-        >
-          <Icon
-            testID='fa-icon-svg-plus'
-            name='plus'
-            size={35}
-            color='grey'
-          ></Icon>
-          <Text testID='icon-text' style={dashboardStyles.text}>
-            Add
-          </Text>
-        </TouchableOpacity>
-        {/* Logbook Icon */}
-        <View testID='dashboard-icon' style={dashboardStyles.iconEl}>
-          <Icon
-            testID='fa-icon-logbook'
-            name='book'
-            size={35}
-            color='grey'
-          ></Icon>
-          <Text testID='icon-text' style={dashboardStyles.text}>
-            Logbook
-          </Text>
-        </View>
-      </View>
-    </View>
-  );
+
 
 	function toggleMarker() {
 		setShowMarker(!showMarker);
 	}
+
+	
+
+	const dashboard = (
+		<Tab.Navigator
+			initialRouteName={"map"}
+			tabBar={(props) => <CustomTabBar {...props} toggleForm={toggleForm} />}
+		>
+			<Tab.Screen
+				name="map"
+				children={()=><UserMap setMarkerPosition={setMarkerPosition}/>}
+				options={{ headerShown: false }}
+			/>
+
+			<Tab.Screen
+				name="book"
+				component={TestLogBook}
+				options={{ headerShown: false }}
+			/>
+
+			<Tab.Screen
+				name="Fake"
+				component={Map}
+				options={{ headerShown: false }}
+			/>
+		</Tab.Navigator>
+	);
+
+	return dashboard;
+}
+
+//   const dashboard = (
+//     <View style={dashboardStyles.dashContainer}>
+//       <View style={dashboardStyles.mapContainer}>
+//         <UserMap showMarker={showMarker} />
+//         <Button title='Confirm' onPress={toggleForm} />
+//       </View>
+//       <View testID='dashboard-container' style={dashboardStyles.container}>
+//         {/* Map Icon */}
+//         <View testID='dashboard-icon' style={dashboardStyles.iconEl}>
+//           <Icon testID='fa-icon-map' name='map' size={35} color='grey'></Icon>
+//           <Text testID='icon-text' style={dashboardStyles.text}>
+//             Map
+//           </Text>
+//         </View>
+//         {/* Add Icon */}
+//         <TouchableOpacity
+//           testID='dashboard-icon'
+//           style={dashboardStyles.iconEl}
+//           onPress={() => toggleMarker()}
+//         >
+//           <Icon
+//             testID='fa-icon-svg-plus'
+//             name='plus'
+//             size={35}
+//             color='grey'
+//           ></Icon>
+//           <Text testID='icon-text' style={dashboardStyles.text}>
+//             Add
+//           </Text>
+//         </TouchableOpacity>
+//         {/* Logbook Icon */}
+//         <View testID='dashboard-icon' style={dashboardStyles.iconEl}>
+//           <Icon
+//             testID='fa-icon-logbook'
+//             name='book'
+//             size={35}
+//             color='grey'
+//           ></Icon>
+//           <Text testID='icon-text' style={dashboardStyles.text}>
+//             Logbook
+//           </Text>
+//         </View>
+//       </View>
+//     </View>
+//   );
+
+
+
 
 	// const dashboard = (
 	//   <View style={dashboardStyles.dashContainer}>
@@ -103,31 +142,3 @@ export default function Dashboard() {
 	//     </View>
 	//   </View>
 	// );
-
-	const dashboard = (
-		<Tab.Navigator
-			initialRouteName={"map"}
-			tabBar={(props) => <CustomTabBar {...props} />}
-		>
-			<Tab.Screen
-				name="map"
-				component={UserMap}
-				options={{ headerShown: false }}
-			/>
-
-			<Tab.Screen
-				name="book"
-				component={TestLogBook}
-				options={{ headerShown: false }}
-			/>
-
-			<Tab.Screen
-				name="Fake"
-				component={UserMap}
-				options={{ headerShown: false }}
-			/>
-		</Tab.Navigator>
-	);
-
-	return dashboard;
-}

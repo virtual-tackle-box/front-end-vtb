@@ -4,14 +4,14 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from './CustomTabBarStylessheet';
 import AddButton from "../AddButton/AddButton";
 
-function TabBar({ state, descriptors, navigation }) {
+function TabBar({ state, descriptors, navigation, toggleForm}) {
   return (
     <View style={styles.mainContainer}>
       {state.routes.map((route, index) => {
         if(route.name ==="Fake"){
           return (
             <View key={index} >
-              <AddButton/>
+              <AddButton toggleForm={toggleForm}/>
             </View>
           )
         }
