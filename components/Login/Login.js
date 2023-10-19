@@ -5,17 +5,21 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './LoginStyles';
 
 function Login() {
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
 
-  function handleLogin(name, password) {
-    if (!name || !password) {
+  function handleLogin() {
+    if (!email || !password) {
       return;
     } else {
       navigation.navigate('Dashboard');
     }
+  }
+
+  function goToSignup(){
+    navigation.navigate('SignUp')
   }
 
   return (
@@ -29,12 +33,12 @@ function Login() {
       </View>
       <View style={styles.loginContainer}>
         <TextInput
-          testID='userName-input'
+          testID='email-input'
           maxLength={12}
           style={styles.input}
-          placeholder='Username'
-          value={name}
-          onChangeText={setName}
+          placeholder='Email'
+          value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           testID='password-input'
@@ -50,7 +54,15 @@ function Login() {
             testID='login-button'
             color='white'
             title='Login'
-            onPress={() => handleLogin(name, password)}
+            onPress={() => handleLogin()}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            testID='signup-button'
+            color='white'
+            title='SignUp'
+            onPress={() => goToSignup()}
           />
         </View>
       </View>
