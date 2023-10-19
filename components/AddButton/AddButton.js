@@ -2,14 +2,21 @@ import { View, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import { styles } from './AddButtonStylesheet'
 import { useState } from "react";
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { useNavigation } from '@react-navigation/native';
 
 
-export default function AddButton(){
+
+export default function AddButton({toggleForm}){
+    const navigation = useNavigation();
 
     const [addFish] = useState(new Animated.Value(40));
     const [addLure] = useState(new Animated.Value(40));
 
     const [isMenuOpen, setMenuOpen] = useState(false);
+
+    // function navigateToCatch(){
+    //     navigation.navigate('AddCatch')
+    // }
 
     const openMenu = () =>{
         setMenuOpen(true);
@@ -42,7 +49,7 @@ export default function AddButton(){
     return (
         <View style={styles.mainContainer}>
             <Animated.View style={[styles.circleButton, {bottom: addFish}]}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => toggleForm()}>
                     <Icon testID='fish-fins-icon' name='book' size={35} color='white'/>
                 </TouchableOpacity>
             </Animated.View>
