@@ -37,6 +37,7 @@ export default function Dashboard() {
 
 	const dashboard = (
 		<Tab.Navigator
+			
 			initialRouteName={"map"}
 			tabBar={(props) => <CustomTabBar {...props} toggleForm={toggleForm} />}
 		>

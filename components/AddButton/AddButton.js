@@ -60,6 +60,7 @@ export default function AddButton({toggleForm}){
             </Animated.View>
             
             <TouchableOpacity
+            testID='add-button'
             style={styles.circleButton}
             onPress={() => {
                 isMenuOpen === false ? openMenu() : closeMenu()
