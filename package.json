@@ -11,18 +11,29 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/react-native-fontawesome": "^0.3.0",
+    "@react-native-community/viewpager": "^5.0.11",
+    "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/stack": "^6.3.18",
     "cypress": "^13.3.1",
     "expo": "~49.0.13",
+    "expo-camera": "~13.4.4",
+    "expo-image-picker": "~14.3.2",
+    "expo-location": "~16.1.0",
+    "expo-permissions": "~14.2.1",
+    "expo-location": "~16.1.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.5",
-    "react-native-web": "~0.19.6",
+    "react-native-elements": "^3.4.3",
+    "react-native-gesture-handler": "^2.13.3",
     "react-native-maps": "1.7.1",
-    "expo-location": "~16.1.0"
+    "react-native-svg": "13.9.0",
+    "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
