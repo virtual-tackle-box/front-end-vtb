@@ -1,12 +1,13 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Header } from 'react-native-elements';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CameraScreen from './UploadPhoto/UploadPhoto';
 import AddFish from './AddFish/AddFish';
 import AddLure from './LureForm/LureForm';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
+import AddSpot from './AddSpot/AddSpot';
 
 // check in with Banjo about passing lat and lon in
 export default function AddCatch({ lat, lon }) {
@@ -30,6 +31,10 @@ export default function AddCatch({ lat, lon }) {
     });
   }
 
+  useEffect(() => {
+    console.log(JSON.stringify(formData, null, 2));
+  }, [formData])
+
   return (
     <>
       <Header
@@ -38,6 +43,7 @@ export default function AddCatch({ lat, lon }) {
         backgroundColor='#F0EAD6'
       />
       <ScrollView style={{ height: '100%', backgroundColor: '#F0EAD6' }}>
+        <AddSpot updateForm={updateForm} spot={formData.spot} />
         <AddFish formData={formData} updateForm={updateForm} />
         <CameraScreen updateForm={updateForm} />
         <AddLure updateForm={updateForm} lure={formData.lure} />
