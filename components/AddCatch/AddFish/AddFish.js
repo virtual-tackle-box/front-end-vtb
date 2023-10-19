@@ -2,7 +2,7 @@ import { Text, TextInput, View } from 'react-native';
 
 import { AddFishStylesheet as styles } from './AddFishStylesheet';
 
-export default function AddFish({ updateForm, species, weight, length }) {
+export default function AddFish({ formData, updateForm }) {
   return (
     <View style={styles.container}>
       <Text style={styles.formHeader}>Fish Details</Text>
@@ -13,7 +13,7 @@ export default function AddFish({ updateForm, species, weight, length }) {
         label='Species'
         placeholder='i.e. Largemouth Bass'
         style={styles.input}
-        value={species}
+        value={formData.species}
         onChangeText={text => updateForm('species', text)}
       />
 
@@ -24,7 +24,7 @@ export default function AddFish({ updateForm, species, weight, length }) {
         label='Weight'
         placeholder='lb'
         style={styles.input}
-        value={weight}
+        value={formData.weight}
         onChangeText={text => updateForm('weight', text)}
       />
 
@@ -35,7 +35,7 @@ export default function AddFish({ updateForm, species, weight, length }) {
         label='Length'
         placeholder='in'
         style={styles.input}
-        value={length}
+        value={formData.length}
         onChangeText={text => updateForm('length', text)}
       />
     </View>
