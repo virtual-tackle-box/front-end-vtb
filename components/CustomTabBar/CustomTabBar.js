@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Pressable, Dimensions, Text } from 'react-native';
+import { View, Pressable, Dimensions, Text, TouchableWithoutFeedback } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from './CustomTabBarStylessheet';
 
@@ -7,14 +7,15 @@ function TabBar({ state, descriptors, navigation }) {
   return (
     <View style={styles.mainContainer}>
       {state.routes.map((route, index) => {
+        if(route.name ==="Fake"){
+          return (
+            <View key={index} style={styles.actionButton} >
+              <Icon name='plus' size={40} color='white'></Icon>
+            </View>
+          )
+        }
         const { options } = descriptors[route.key];
-        console.log(options.tabBarLabel)
-        const label = options.tabBarLabel !== undefined
-          ? options.tabBarLabel
-          : options.title !== undefined
-          ? options.title
-          : route.name;
-
+        const label = route.name
         const isFocused = index === state.index;
 
         const handlePress = () => {
@@ -32,9 +33,9 @@ function TabBar({ state, descriptors, navigation }) {
           <View key={index} style={styles.iconContainer}>
             <Pressable
               onPress={handlePress}
-              style={{ backgroundColor: "#25292e", borderRadius: 20 }}>
+              style={{ backgroundColor: isFocused ? "black" : "#25292e" , borderRadius: 20 }}>
               <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, padding: 15 }}>
-                <Icon name={label} size={30} color={isFocused ? 'blue' : 'gray'} />
+                <Icon name={label} size={30} color={isFocused ? 'green' : 'gray'} />
                 <Text style={{ color: isFocused ? 'white' : 'gray' }}>{label}</Text>
               </View>
             </Pressable>

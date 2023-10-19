@@ -20,6 +20,19 @@ export const styles = StyleSheet.create({
 		borderRadius: 1,
         backgroundColor: "#25292e",
 	},
+
+	actionButton: {
+		top: -25,
+		width: 60,
+		height: 60,
+		backgroundColor: 'black',
+		justifyContent: "center",
+		alignItems: "center",
+		borderRadius: '30',
+		borderColor: 'white',
+		borderWidth: 2,
+
+	}
 });
 
 
