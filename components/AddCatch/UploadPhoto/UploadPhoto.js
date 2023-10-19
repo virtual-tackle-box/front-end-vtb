@@ -54,6 +54,7 @@ export default function CameraScreen({ updateForm }) {
     });
 
     if (!result.canceled) {
+      setCameraOpen(false);
       setImageUri(result.assets?.[0].uri || result.uri);
       updateForm('url', result.assets?.[0].uri || result.uri);
     }
@@ -87,9 +88,7 @@ export default function CameraScreen({ updateForm }) {
     <View style={styles.uploadPhoto}>
       {/* TOP NAV BAR */}
       <View testID='camera-view-top-nav-bar' style={styles.cameraTopBar}>
-        <Text style={{ fontSize: 20, fontWeight: '600' }}>
-          Select Photo (optional)
-        </Text>
+        <Text style={{ fontSize: 24 }}>Select Photo (optional)</Text>
       </View>
       {/* CAMERA MANAGEMENT OPTIONS */}
       <View style={styles.cameraManagementOptions}>
@@ -105,15 +104,11 @@ export default function CameraScreen({ updateForm }) {
       {/* CAMERA COMPONENT */}
       {cameraOpen && cameraComponent}
       {/* MEDIA VIEWING CONTAINER */}
-      {imageUri && !cameraOpen && (
-        <View style={styles.mediaContainer}>
+      <View style={styles.mediaContainer}>
+        {imageUri && !cameraOpen && (
           <Image source={{ uri: imageUri }} style={styles.image} />
-        </View>
-      )}
+        )}
+      </View>
     </View>
   );
 }
-
-/* <TouchableOpacity style={[styles.button, styles.submitButton]}>
-        <Text>Submit</Text>
-     </TouchableOpacity> */

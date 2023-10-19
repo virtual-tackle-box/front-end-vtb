@@ -70,7 +70,7 @@ export const uploadPhotoStylesheet = StyleSheet.create({
   },
 
   mediaContainer: {
-    height: 800,
+    height: 400,
     padding: 20
   },
 
