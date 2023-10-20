@@ -10,7 +10,7 @@ export default function AddSpot({ spot, updateForm }) {
       </Text>
 
       {/* LURE INPUT */}
-      <Text>Spot Name*</Text>
+      <Text testID='spot-input-label'>Spot Name*</Text>
       <TextInput
         testID='spot-input'
         label='Fishing Spot'
