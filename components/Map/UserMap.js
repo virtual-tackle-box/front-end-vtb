@@ -17,6 +17,8 @@ export default function UserMap({ setMarkerPosition }) {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [slideInAnim] = useState(new Animated.Value(0));
+	const [catchMarkers, setCatchMarkers] = useState([])
+	const [catches, setCatches] = useState([]);
 
 	let mapRef = useRef(null);
 	let markerRef = useRef(null);
@@ -38,6 +40,26 @@ export default function UserMap({ setMarkerPosition }) {
 			markerRef.current.showCallout();
 		}
 	}
+
+	useEffect(() => {
+		  
+	
+		  const newCatchMarkers = catches.map(catchData => {
+				return {
+					id: catchData.id,
+					coordinates: {
+						latitude: catchData.latitude,
+						longitude: catchData.longitude,
+					},
+					title: catchData.species,
+					description: catchData.weight,
+				}
+		  })
+			
+			
+		  setCatchMarkers(newCatchMarkers);
+		
+	  }, [catches]);
 
 	useEffect(() => {
 		if (markerRef.current) {
@@ -82,7 +104,7 @@ export default function UserMap({ setMarkerPosition }) {
 			}
 
 			let location = await Location.getCurrentPositionAsync({});
-			
+
 			setLocation(location);
 
 			const locObj = {
@@ -111,13 +133,32 @@ export default function UserMap({ setMarkerPosition }) {
 	const slideInStyle = {
 		transform: [
 			{
-				translateX: slideInAnim.interpolate({
+				translateY: slideInAnim.interpolate({
 					inputRange: [0, 1],
 					outputRange: [300, 0],
 				}),
 			},
 		],
 	};
+
+	//title species
+	//info weight
+
+	const catchMarkerComponents = catchMarkers.map(marker => (
+		<Marker
+			key={marker.id}
+			coordinate={marker.coordinates}
+			title={marker.species}
+			description={marker.weight}
+			>
+				<Callout>
+					<Text>{marker.species}</Text>
+					<Text>{marker.weight}</Text>
+				</Callout>
+
+			</Marker>
+
+	))
 
 	const mapView =
 		onWeb === true ? (
@@ -156,6 +197,7 @@ export default function UserMap({ setMarkerPosition }) {
 							<Text>Drag to place</Text>
 						</Callout>
 					</Marker>
+					{catchMarkerComponents}
 				</MapView>
 			</Animated.View>
 		);
