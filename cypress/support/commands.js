@@ -23,3 +23,26 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getBySel', selector => {
+  return cy.get(`[data-testid="${selector}"]`);
+});
+
+Cypress.Commands.add('loginViaUI', user => {
+  cy.visit('http://localhost:19006');
+  cy.getBySel('userName-input').type(user.name);
+  cy.getBySel('password-input').type(user.password);
+  cy.getBySel('login-button').click();
+});
+
+Cypress.Commands.add('testPlaceholder', (selector, placeholder) => {
+  return cy
+    .getBySel(`${selector}`)
+    .should('have.attr', 'Placeholder', `${placeholder}`);
+});
+
+Cypress.Commands.add('checkFormInputValue', (selector, value) => {
+  cy.getBySel(`${selector}`).clear();
+  cy.getBySel(`${selector}`).type(`${value}`);
+  cy.getBySel(`${selector}`).should('have.value', `${value}`);
+})

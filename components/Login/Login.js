@@ -42,6 +42,7 @@ function Login() {
       setErrorMsg(error.message)
     }
   }
+}
 
   function goToSignup(){
     navigation.navigate('SignUp')
