@@ -31,7 +31,7 @@ export default function SignUp() {
       }
 
 	function validateForm() {
-		if (!email || !validateEmail()) {
+		if (!validateEmail()) {
 			setErrorMsg("Please enter a valid email address");
 			return false;
 		} else if (password.length < 1) {
