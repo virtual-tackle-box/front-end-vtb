@@ -14,15 +14,16 @@ export default function AddCatch({ route }) {
   console.log('LAT', lat);
   console.log('LON', lon);
   const [formData, setFormData] = useState({
-    spot: '',
-    lat,
-    lon,
+    spot_name: '',
+    latitude: lat,
+    longitude: lon,
     species: '',
     weight: 0.0,
     length: 0.0,
     lure: '',
-    url: ''
+    photo_url: ''
   });
+  const [error, setError] = useState('');
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -33,9 +34,37 @@ export default function AddCatch({ route }) {
     });
   }
 
-  useEffect(() => {
-    console.log(JSON.stringify(formData, null, 2));
-  }, [formData]);
+  async function submitForm() {
+    const url =
+      'https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/catches';
+
+    const data = {
+      catch: formData
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        console.log('response: ', JSON.stringify(response, null, 2));
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+      console.log('response data: ', JSON.stringify(responseData, null, 2));
+    } catch (error) {
+      setError(error);
+      console.log('error: ', error);
+    }
+  }
 
   return (
     <>
@@ -52,11 +81,12 @@ export default function AddCatch({ route }) {
         <AddFish formData={formData} updateForm={updateForm} />
         <AddLure updateForm={updateForm} lure={formData.lure} />
         <CameraScreen updateForm={updateForm} />
-        <TouchableOpacity style={styles.submitButton}>
+        <TouchableOpacity style={styles.submitButton} onPress={submitForm}>
           <Text testID='submit-button' style={{ fontSize: 24 }}>
             Submit
           </Text>
         </TouchableOpacity>
+        {error && <Text>{error}</Text>}
       </ScrollView>
     </>
   );
