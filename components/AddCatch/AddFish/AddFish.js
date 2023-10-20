@@ -5,11 +5,14 @@ import { AddFishStylesheet as styles } from './AddFishStylesheet';
 export default function AddFish({ formData, updateForm }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.formHeader}>Fish Details</Text>
+      <Text testID='fish-header' style={styles.formHeader}>
+        Fish Details
+      </Text>
 
       {/* SPECIES INPUT */}
-      <Text>Species</Text>
+      <Text testID='species-input-header'>Species</Text>
       <TextInput
+        testID='species-input'
         label='Species'
         placeholder='i.e. Largemouth Bass'
         style={styles.input}
@@ -18,8 +21,9 @@ export default function AddFish({ formData, updateForm }) {
       />
 
       {/* WEIGHT INPUT */}
-      <Text>Weight</Text>
+      <Text testID='weight-input-header'>Weight</Text>
       <TextInput
+        testID='weight-input'
         keyboardType='numeric'
         label='Weight'
         placeholder='lb'
@@ -29,8 +33,9 @@ export default function AddFish({ formData, updateForm }) {
       />
 
       {/* LENGTH INPUT */}
-      <Text>Length</Text>
+      <Text testID='length-input-header'>Length</Text>
       <TextInput
+        testID='length-input'
         keyboardType='numeric'
         label='Length'
         placeholder='in'

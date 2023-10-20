@@ -9,11 +9,10 @@ import AddLure from './LureForm/LureForm';
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 import AddSpot from './AddSpot/AddSpot';
 
-// check in with Banjo about passing lat and lon in
-export default function AddCatch({route}) {
-  const {lat,lon} = route.params;
-  console.log("LAT",lat)
-  console.log("LON",lon)
+export default function AddCatch({ route }) {
+  const { lat, lon } = route.params;
+  console.log('LAT', lat);
+  console.log('LON', lon);
   const [formData, setFormData] = useState({
     spot: '',
     lat,
@@ -36,7 +35,7 @@ export default function AddCatch({route}) {
 
   useEffect(() => {
     console.log(JSON.stringify(formData, null, 2));
-  }, [formData])
+  }, [formData]);
 
   return (
     <>
@@ -45,13 +44,18 @@ export default function AddCatch({route}) {
         centerComponent={{ text: 'ADD CATCH', style: { fontSize: 25 } }}
         backgroundColor='#F0EAD6'
       />
-      <ScrollView style={{ height: '100%', backgroundColor: '#F0EAD6' }}>
+      <ScrollView
+        testID='catch-form-container'
+        style={{ height: '100%', backgroundColor: '#F0EAD6' }}
+      >
         <AddSpot updateForm={updateForm} spot={formData.spot} />
         <AddFish formData={formData} updateForm={updateForm} />
-        <CameraScreen updateForm={updateForm} />
         <AddLure updateForm={updateForm} lure={formData.lure} />
+        <CameraScreen updateForm={updateForm} />
         <TouchableOpacity style={styles.submitButton}>
-          <Text style={{ fontSize: 24 }}>Submit</Text>
+          <Text testID='submit-button' style={{ fontSize: 24 }}>
+            Submit
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </>

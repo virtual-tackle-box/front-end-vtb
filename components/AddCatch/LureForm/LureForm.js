@@ -4,12 +4,13 @@ import { AddLureStylesheet as styles } from './LureFormStylesheet';
 export default function AddLure({ updateForm, lure }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.formHeader}>Lure Details</Text>
+      <Text testID='lure-header' style={styles.formHeader}>Lure Details</Text>
 
       {/* LURE INPUT */}
       <Text>Lure Used</Text>
       <TextInput
-        label='Species'
+        testID='lure-input'
+        label='Lure'
         placeholder='i.e. Topwater Popper'
         style={styles.input}
         value={lure}
