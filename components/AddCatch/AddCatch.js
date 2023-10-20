@@ -1,6 +1,6 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Header } from 'react-native-elements';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import CameraScreen from './UploadPhoto/UploadPhoto';
 import AddFish from './AddFish/AddFish';
@@ -80,7 +80,6 @@ export default function AddCatch({ route }) {
           <TouchableOpacity onPress={navToDash}>
             <Text>Cancel</Text>
           </TouchableOpacity>
-          // { text: 'Cancel' }
         }
         centerComponent={{ text: 'ADD CATCH', style: { fontSize: 25 } }}
         backgroundColor='#F0EAD6'
