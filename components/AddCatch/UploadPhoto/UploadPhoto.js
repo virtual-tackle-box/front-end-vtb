@@ -65,6 +65,7 @@ export default function CameraScreen({ updateForm }) {
       {/* CAMERA COMPONENT */}
       <View style={styles.camera}>
         <Camera
+          testID='camera-component'
           ref={ref => setCamera(ref)}
           style={styles.fixedRatio}
           type={type}
@@ -92,10 +93,11 @@ export default function CameraScreen({ updateForm }) {
       </View>
       {/* CAMERA MANAGEMENT OPTIONS */}
       <View style={styles.cameraManagementOptions}>
-        <TouchableOpacity onPress={pickImage} style={styles.button}>
+        <TouchableOpacity testID='gallery-button' onPress={pickImage} style={styles.button}>
           <Text>Gallery</Text>
         </TouchableOpacity>
         <Icon
+          testID='camera-icon-button'
           name='camera'
           style={{ fontSize: 30, paddingRight: 35 }}
           onPress={() => setCameraOpen(prev => !prev)}

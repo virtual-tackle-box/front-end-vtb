@@ -42,5 +42,14 @@ describe('Add Catch Form', () => {
     cy.checkFormInputValue('lure-input', 'Swimbait');
   });
 
-  // test for camera component visible on screen after clicking button
+  it('Contains camera and gallery buttons', () => {
+    cy.getBySel('camera-icon-button').should('be.visible');
+    cy.getBySel('gallery-button').should('be.visible');
+  });
+
+  it('Contains the Submit button', () => {
+    cy.getBySel('submit-button').should('be.visible')
+  });
+
+  // it('Opens and closes the gallery')
 });
