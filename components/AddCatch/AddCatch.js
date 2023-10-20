@@ -8,11 +8,11 @@ import AddLure from './LureForm/LureForm';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 import AddSpot from './AddSpot/AddSpot';
+import { useNavigation } from '@react-navigation/native';
 
 export default function AddCatch({ route }) {
+  const navigation = useNavigation();
   const { lat, lon } = route.params;
-  console.log('LAT', lat);
-  console.log('LON', lon);
   const [formData, setFormData] = useState({
     spot_name: '',
     latitude: lat,
@@ -35,6 +35,10 @@ export default function AddCatch({ route }) {
   }
 
   async function submitForm() {
+    if (!formData.spot_name || !formData.species) {
+      setError('Please fill out required form fields.');
+    }
+
     const url =
       'https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/catches';
 
@@ -54,22 +58,29 @@ export default function AddCatch({ route }) {
       const response = await fetch(url, options);
 
       if (!response.ok) {
-        console.log('response: ', JSON.stringify(response, null, 2));
         throw new Error('Network response was not ok');
       }
 
       const responseData = await response.json();
-      console.log('response data: ', JSON.stringify(responseData, null, 2));
     } catch (error) {
       setError(error);
       console.log('error: ', error);
     }
   }
 
+  function navToDash() {
+    navigation.navigate('Dashboard');
+  }
+
   return (
     <>
       <Header
-        leftComponent={{ text: 'Cancel' }} // needs event handler
+        leftComponent={
+          <TouchableOpacity onPress={navToDash}>
+            <Text>Cancel</Text>
+          </TouchableOpacity>
+          // { text: 'Cancel' }
+        }
         centerComponent={{ text: 'ADD CATCH', style: { fontSize: 25 } }}
         backgroundColor='#F0EAD6'
       />
@@ -77,6 +88,9 @@ export default function AddCatch({ route }) {
         testID='catch-form-container'
         style={{ height: '100%', backgroundColor: '#F0EAD6' }}
       >
+        <Text style={{ marginLeft: 10 }}>
+          * indicates a required form field
+        </Text>
         <AddSpot updateForm={updateForm} spot={formData.spot} />
         <AddFish formData={formData} updateForm={updateForm} />
         <AddLure updateForm={updateForm} lure={formData.lure} />
