@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { styles } from "./AddLureStylesheet";
 import LureForm from "./LureForm/LureForm";
-import LureImage from "/Users/banjaminhatch/turing/4mod/capstone/front-end-vtb/components/AddLure/lureiconNobackground.png";
+import LureImage from "/components/AddLure/lureiconNobackground.png";
 
 export default function AddLure() {
 	const [errorMsg, setErrorMsg] = useState("");
@@ -22,7 +22,7 @@ export default function AddLure() {
 	});
 
     function postData(){
-        
+
     }
 
 	function updateForm(name, value) {
