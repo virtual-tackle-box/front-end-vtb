@@ -10,7 +10,7 @@ export default function AddFish({ formData, updateForm }) {
       </Text>
 
       {/* SPECIES INPUT */}
-      <Text testID='species-input-header'>Species</Text>
+      <Text testID='species-input-header'>Species*</Text>
       <TextInput
         testID='species-input'
         label='Species'

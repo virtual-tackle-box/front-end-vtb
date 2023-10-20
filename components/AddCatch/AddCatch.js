@@ -35,8 +35,9 @@ export default function AddCatch({ route }) {
   }
 
   async function submitForm() {
-    if (!formData.spot_name || !formData.species) {
+    if (!formData.spot_name.length || !formData.species.length) {
       setError('Please fill out required form fields.');
+      return;
     }
 
     const url =
@@ -63,7 +64,7 @@ export default function AddCatch({ route }) {
 
       const responseData = await response.json();
     } catch (error) {
-      setError(error);
+      setError(error.message);
       console.log('error: ', error);
     }
   }
@@ -95,12 +96,12 @@ export default function AddCatch({ route }) {
         <AddFish formData={formData} updateForm={updateForm} />
         <AddLure updateForm={updateForm} lure={formData.lure} />
         <CameraScreen updateForm={updateForm} />
+        {error && <Text style={{ marginLeft: 45 }}>{error}</Text>}
         <TouchableOpacity style={styles.submitButton} onPress={submitForm}>
           <Text testID='submit-button' style={{ fontSize: 24 }}>
             Submit
           </Text>
         </TouchableOpacity>
-        {error && <Text>{error}</Text>}
       </ScrollView>
     </>
   );
