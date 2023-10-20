@@ -6,10 +6,12 @@ import {
 	Dimensions,
 	Platform,
 	Animated,
+	ImageBackground,
 } from "react-native";
 import { styles } from "./UserMapStylesheet";
 import * as Location from "expo-location";
 import { useIsFocused } from "@react-navigation/native";
+import UsaMap from "./usaMap.jpeg";
 
 export default function UserMap({ setMarkerPosition }) {
 	const [location, setLocation] = useState(null);
@@ -46,13 +48,23 @@ export default function UserMap({ setMarkerPosition }) {
 	}, [location]);
 
 	useEffect(() => {
-		if (mapRef.current && location) {
+		if (mapRef.current && location !== "denied") {
 			mapRef.current.animateToRegion(
 				{
 					latitude: location.coords.latitude,
 					longitude: location.coords.longitude,
 					latitudeDelta: 0.01,
 					longitudeDelta: 0.01,
+				},
+				2000
+			);
+		} else if (mapRef.current && location === "denied") {
+			mapRef.current.animateToRegion(
+				{
+					latitude: 39.8283,
+					longitude: 98.5795,
+					latitudeDelta: 14,
+					longitudeDelta: 14,
 				},
 				1000
 			);
@@ -62,15 +74,20 @@ export default function UserMap({ setMarkerPosition }) {
 	useEffect(() => {
 		async function getLocation() {
 			let { status } = await Location.requestForegroundPermissionsAsync();
+
 			if (status !== "granted") {
 				setErrorMsg("Permission to access location was denied");
+				setLocation("denied");
 				return;
 			}
+
 			let location = await Location.getCurrentPositionAsync({});
+			
 			setLocation(location);
+
 			const locObj = {
 				latitude: location.coords.latitude,
-				longitude: location.coords.latitude,
+				longitude: location.coords.longitude,
 			};
 			setMarkerPosition(location);
 		}
@@ -103,7 +120,25 @@ export default function UserMap({ setMarkerPosition }) {
 	};
 
 	const mapView =
-		onWeb === false && location ? (
+		onWeb === true ? (
+			<View style={styles.container}>
+				<Text>Map not supported in Web Mode!</Text>
+			</View>
+		) : location === null ? (
+			<ImageBackground
+				source={UsaMap}
+				style={styles.backgroundImage}
+				resizeMode="contain"
+			>
+				<View style={styles.textContainer}>
+					<Text style={styles.waitText}>Awaiting location...</Text>
+				</View>
+			</ImageBackground>
+		) : location === "denied" ? (
+			<Animated.View style={[styles.container, slideInStyle]}>
+				<MapView ref={mapRef} style={styles.map} mapType="satellite"></MapView>
+			</Animated.View>
+		) : (
 			<Animated.View style={[styles.container, slideInStyle]}>
 				<MapView ref={mapRef} style={styles.map} mapType="satellite">
 					<Marker
@@ -114,7 +149,6 @@ export default function UserMap({ setMarkerPosition }) {
 						}}
 						draggable
 						onDragEnd={(e) => {
-							console.log("setMarker in userMarp", e.nativeEvent.coordinate);
 							setMarkerPosition(e.nativeEvent.coordinate);
 						}}
 					>
@@ -124,10 +158,6 @@ export default function UserMap({ setMarkerPosition }) {
 					</Marker>
 				</MapView>
 			</Animated.View>
-		) : (
-			<View style={styles.container}>
-				<Text>Map not supported in Web Mode!</Text>
-			</View>
 		);
 
 	return mapView;
