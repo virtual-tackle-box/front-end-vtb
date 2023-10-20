@@ -1,5 +1,5 @@
 import { Text, TextInput, View } from 'react-native';
-import { AddLureStylesheet as styles } from './LureFormStylesheet';
+import { styles } from './LureFormStylesheet';
 
 export default function AddLure({ updateForm, lure }) {
   return (

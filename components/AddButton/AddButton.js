@@ -14,9 +14,9 @@ export default function AddButton({toggleForm}){
 
     const [isMenuOpen, setMenuOpen] = useState(false);
 
-    // function navigateToCatch(){
-    //     navigation.navigate('AddCatch')
-    // }
+    function navigateToLure(){
+        navigation.navigate('AddLure')
+    }
 
     const openMenu = () =>{
         setMenuOpen(true);
@@ -54,7 +54,7 @@ export default function AddButton({toggleForm}){
                 </TouchableOpacity>
             </Animated.View>
             <Animated.View style={[styles.circleButton, {bottom: addLure}]}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigateToLure()}>
                     <Icon testID='lure-icon' name='superpowers' size={35} color='white'/>
                 </TouchableOpacity>
             </Animated.View>
