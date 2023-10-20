@@ -24,7 +24,10 @@ export default function SignUp() {
 		if (!email) {
 			setErrorMsg("Please enter an email address");
 			return false;
-		} else if (password !== passwordConfirm || password.length < 1) {
+		} else if (password.length < 1) {
+			setErrorMsg("Please enter a password");
+            return false;
+		} else if (password !== passwordConfirm) {
 			setErrorMsg("Passwords do not match");
 			return false;
 		} else {
