@@ -7,14 +7,39 @@ import styles from './LoginStyles';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const navigation = useNavigation();
+  
+  //Does nothing. this will live in Api calls
+  function getUserId(){
 
-  function handleLogin() {
+  }
+  async function handleLogin() {
     if (!email || !password) {
+      setErrorMsg('Invalid login credentials')
       return;
     } else {
-      navigation.navigate('Dashboard');
+      try{
+        setErrorMsg('')
+        const data = {
+          email: email,
+          password: password,
+        }
+        const getObj = {
+          method: 'GET',
+          headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+        }
+        const response = await getUserId('url', getObj)
+
+        const userData = await response.json()
+        navigation.navigate('Dashboard', {userData: userData});
+    }
+    catch (error){
+      setErrorMsg(error.message)
     }
   }
 
@@ -61,10 +86,15 @@ function Login() {
           <Button
             testID='signup-button'
             color='white'
-            title='SignUp'
+            title='Sign Up'
             onPress={() => goToSignup()}
           />
         </View>
+        {errorMsg && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{errorMsg}</Text>
+            </View>
+        )}
       </View>
     </View>
   );

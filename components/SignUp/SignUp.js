@@ -12,23 +12,15 @@ export default function SignUp() {
 
 	const navigation = useNavigation();
 
-	// function handleLogin(name, password) {
-	// 	if (!name || !password) {
-	// 		return;
-	// 	} else {
-	// 		navigation.navigate("Dashboard");
-	// 	}
-	// }
-
 	function validatePhoneNumber() {
 		const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 		return re.test(number);
 	}
 
-    function validateEmail() {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
-      }
+	function validateEmail() {
+		var re = /\S+@\S+\.\S+/;
+		return re.test(email);
+	}
 
 	function validateForm() {
 		if (!validateEmail()) {
@@ -48,20 +40,37 @@ export default function SignUp() {
 		}
 	}
 
-	function sendNewUser() {
-		// This will post a new user.
-		const newUser = {
-			email: email,
-			password: password,
-			number: number,
-		};
-	}
+	function postNewUser() {}
 
-	function handleSignUp() {
-		console.log("password", password);
-		console.log("passlength", password.length);
-		if (validateForm()) {
+	async function handleSignUp() {
+		// This will post a new user.
+		if (!validateForm()) {
+			return;
+		}
+		try {
+			const newUser = {
+				email: email,
+				password: password,
+				number: number,
+			};
+
+			const options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(newUser),
+			};
+			const response = await postNewUser("url", options);
+
+			if (!response.ok) {
+				throw new Error("There was an issue signing up.");
+			}
+			const data = await response.json();
+
 			navigation.navigate("Login");
+		} catch (error) {
+			setErrorMsg(error.message);
 		}
 	}
 
