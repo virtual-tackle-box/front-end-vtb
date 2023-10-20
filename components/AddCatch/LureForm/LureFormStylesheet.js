@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const AddLureStylesheet = StyleSheet.create({
+export const LureFormStylesheet = StyleSheet.create({
   container: {
     width: '100%',
     padding: 20,
