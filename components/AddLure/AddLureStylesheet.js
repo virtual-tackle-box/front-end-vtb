@@ -27,4 +27,13 @@ export const styles = StyleSheet.create({
 		padding: 50,
 		marginTop: 150,
 	},
+
+	cancelButton: {
+		top: 100,
+	},
+
+	errorContainer:{
+		height: 50,
+		backgroundColor: 'yellow'
+	}
 });

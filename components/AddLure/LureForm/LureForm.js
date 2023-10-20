@@ -2,7 +2,7 @@ import { Text, TextInput, View, TouchableOpacity } from "react-native";
 
 import { styles } from "./LureFormStylesheet";
 
-export default function AddFish({ formData, updateForm }) {
+export default function AddFish({ formData, updateForm, sendLureToApi }) {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.formHeader}>Lure Details</Text>
@@ -44,7 +44,7 @@ export default function AddFish({ formData, updateForm }) {
 				onChangeText={(text) => updateForm("weight", text)}
 			/>
 
-			<TouchableOpacity style={styles.submitButton}>
+			<TouchableOpacity onPress={()=> sendLureToApi()} style={styles.submitButton}>
 				<Text style={{ fontSize: 24 }}>Submit</Text>
 			</TouchableOpacity>
 		</View>
