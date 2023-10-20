@@ -33,10 +33,11 @@ function Login() {
       },
       body: JSON.stringify(data)
         }
-        const response = await getUserId('url', getObj)
+        // const response = await getUserId('url', getObj)
 
-        const userData = await response.json()
-        navigation.navigate('Dashboard', {userData: userData});
+        // const userData = await response.json()
+        // navigation.navigate('Dashboard', {userData: userData});
+        navigation.navigate('Dashboard')
     }
     catch (error){
       setErrorMsg(error.message)
