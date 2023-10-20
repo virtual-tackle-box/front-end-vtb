@@ -1,0 +1,47 @@
+export async function postNewCatch(formData) {
+  const url =
+    'https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/catches';
+
+  const data = {
+    catch: formData
+  };
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+  } catch (error) {
+    setError(error.message);
+    console.error('error: ', error);
+  }
+}
+
+export async function getLures(userID) {
+  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/lures/`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    setError(error.message);
+    console.error('error: ', error);
+  }
+}
