@@ -1,6 +1,5 @@
-export async function postNewCatch(formData) {
-  const url =
-    'https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/catches';
+export async function postNewCatch(userID = 1, formData) {
+  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/${userID}/catches`;
 
   const data = {
     catch: formData
@@ -23,13 +22,13 @@ export async function postNewCatch(formData) {
 
     const responseData = await response.json();
   } catch (error) {
-    setError(error.message);
     console.error('error: ', error);
+    return error;
   }
 }
 
-export async function getLures(userID) {
-  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/lures/`;
+export async function getLures(userID = 1) {
+  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/${userID}/lures/`;
 
   try {
     const response = await fetch(url);
@@ -41,13 +40,13 @@ export async function getLures(userID) {
     const responseData = await response.json();
     return responseData;
   } catch (error) {
-    setError(error.message);
     console.error('error: ', error);
+    return error;
   }
 }
 
-export async function deleteLure(lureID) {
-  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/lures/${lureID}`;
+export async function deleteLure(userID = 1, lureID) {
+  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/${userID}/lures/${lureID}`;
 
   const options = {
     method: 'DELETE',
@@ -66,5 +65,6 @@ export async function deleteLure(lureID) {
     }
   } catch (error) {
     console.error('An error occurred:', error);
+    return error;
   }
 }
