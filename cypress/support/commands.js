@@ -30,7 +30,7 @@ Cypress.Commands.add('getBySel', selector => {
 
 Cypress.Commands.add('loginViaUI', user => {
   cy.visit('http://localhost:19006');
-  cy.getBySel('userName-input').type(user.name);
+  cy.getBySel('email-input').type(user.name);
   cy.getBySel('password-input').type(user.password);
   cy.getBySel('login-button').click();
 });

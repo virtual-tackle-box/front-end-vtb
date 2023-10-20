@@ -4,6 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './components/Login/Login';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import AddCatch from './components/AddCatch/AddCatch';
+
+import SignUp from './components/SignUp/SignUp';
+
+import AddLure from './components/AddLure/AddLure';
+
 import Tackle from './components/Books/Tackle/Tackle';
 import CatchLog from './components/Books/CatchLog/CatchLog';
 import BooksDashboard from './components/Books/BooksDashboard';
@@ -21,6 +26,13 @@ export default function App() {
           }}
           component={Login}
         />
+         <Stack.Screen
+          name='SignUp'
+          options={{
+            headerShown: false
+          }}
+          component={SignUp}
+        />
         <Stack.Screen
           name='Dashboard'
           options={{
@@ -35,6 +47,15 @@ export default function App() {
           }}
           component={AddCatch}
         />
+        
+        <Stack.Screen
+          name='AddLure'
+          options={{
+            headerShown: false
+          }}
+          component={AddLure}
+        />
+
         <Stack.Screen
           name='Tackle'
           options={{
