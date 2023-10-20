@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { styles } from "./AddLureStylesheet";
 import LureForm from "./LureForm/LureForm";
-import LureImage from "/components/AddLure/lureiconNobackground.png";
+import LureImage from "./lureiconNobackground.png";
 
 export default function AddLure() {
 	const [errorMsg, setErrorMsg] = useState("");
