@@ -48,14 +48,6 @@ const styles = StyleSheet.create({
     width: 350,
     height: 50
   },
-
-  errorContainer:{
-    marginTop: 20,
-  },
-
-  errorText:{
-    color: 'red'
-  }
   
 });
 

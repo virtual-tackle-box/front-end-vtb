@@ -5,17 +5,48 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './LoginStyles';
 
 function Login() {
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const navigation = useNavigation();
+  
+  //Does nothing. this will live in Api calls
+  function getUserId(){
 
-  function handleLogin(name, password) {
-    if (!name || !password) {
+  }
+  async function handleLogin() {
+    if (!email || !password) {
+      setErrorMsg('Invalid login credentials')
       return;
     } else {
-      navigation.navigate('Dashboard');
+      try{
+        setErrorMsg('')
+        const data = {
+          email: email,
+          password: password,
+        }
+        const getObj = {
+          method: 'GET',
+          headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+        }
+        // const response = await getUserId('url', getObj)
+
+        // const userData = await response.json()
+        // navigation.navigate('Dashboard', {userData: userData});
+        navigation.navigate('Dashboard')
     }
+    catch (error){
+      setErrorMsg(error.message)
+    }
+  }
+}
+
+  function goToSignup(){
+    navigation.navigate('SignUp')
   }
 
   return (
@@ -29,12 +60,12 @@ function Login() {
       </View>
       <View style={styles.loginContainer}>
         <TextInput
-          testID='userName-input'
+          testID='email-input'
           maxLength={12}
           style={styles.input}
-          placeholder='Username'
-          value={name}
-          onChangeText={setName}
+          placeholder='Email'
+          value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           testID='password-input'
@@ -50,9 +81,22 @@ function Login() {
             testID='login-button'
             color='white'
             title='Login'
-            onPress={() => handleLogin(name, password)}
+            onPress={() => handleLogin()}
           />
         </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            testID='signup-button'
+            color='white'
+            title='Sign Up'
+            onPress={() => goToSignup()}
+          />
+        </View>
+        {errorMsg && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{errorMsg}</Text>
+            </View>
+        )}
       </View>
     </View>
   );
