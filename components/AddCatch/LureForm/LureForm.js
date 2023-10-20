@@ -7,7 +7,7 @@ export default function AddLure({ updateForm, lure }) {
       <Text testID='lure-header' style={styles.formHeader}>Lure Details</Text>
 
       {/* LURE INPUT */}
-      <Text>Lure Used</Text>
+      <Text testID='lure-input-label'>Lure Used</Text>
       <TextInput
         testID='lure-input'
         label='Lure'

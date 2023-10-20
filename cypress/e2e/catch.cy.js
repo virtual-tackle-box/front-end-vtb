@@ -7,6 +7,10 @@ describe('Add Catch Form', () => {
     cy.getBySel('fish-fins-icon').click();
   });
 
+  it('Contains required form fields disclaimer', () => {
+    cy.contains('* indicates a required form field');
+  });
+
   it('Contains form header', () => {
     cy.contains('ADD CATCH');
     cy.contains('Cancel');
@@ -21,6 +25,16 @@ describe('Add Catch Form', () => {
     );
     cy.getBySel('lure-header').should('include.text', 'Lure Details');
   });
+
+  it('Contains all input labels', () => {
+    cy.getBySel('spot-input-label').should('include.text', 'Spot Name*')
+
+    cy.getBySel('species-input-label').should('include.text', 'Species*')
+    cy.getBySel('weight-input-label').should('include.text', 'Weight')
+    cy.getBySel('length-input-label').should('include.text', 'Length')
+    
+    cy.getBySel('lure-input-label').should('include.text', 'Lure Used')
+  })
 
   it('Form inputs contain placeholder text', () => {
     cy.testPlaceholder('spot-input', 'i.e. Top Secret Spot #2');
@@ -48,6 +62,6 @@ describe('Add Catch Form', () => {
   });
 
   it('Contains the Submit button', () => {
-    cy.getBySel('submit-button').should('be.visible')
+    cy.getBySel('submit-button').should('be.visible');
   });
 });

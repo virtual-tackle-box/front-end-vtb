@@ -10,7 +10,7 @@ export default function AddFish({ formData, updateForm }) {
       </Text>
 
       {/* SPECIES INPUT */}
-      <Text testID='species-input-header'>Species</Text>
+      <Text testID='species-input-label'>Species*</Text>
       <TextInput
         testID='species-input'
         label='Species'
@@ -21,7 +21,7 @@ export default function AddFish({ formData, updateForm }) {
       />
 
       {/* WEIGHT INPUT */}
-      <Text testID='weight-input-header'>Weight</Text>
+      <Text testID='weight-input-label'>Weight</Text>
       <TextInput
         testID='weight-input'
         keyboardType='numeric'
@@ -33,7 +33,7 @@ export default function AddFish({ formData, updateForm }) {
       />
 
       {/* LENGTH INPUT */}
-      <Text testID='length-input-header'>Length</Text>
+      <Text testID='length-input-label'>Length</Text>
       <TextInput
         testID='length-input'
         keyboardType='numeric'

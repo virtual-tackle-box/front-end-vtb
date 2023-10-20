@@ -1,9 +1,6 @@
 describe('Dashboard', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:19006');
-    cy.get('[data-testid="userName-input"]').type('Josh');
-    cy.get('[data-testid="password-input"]').type('PW');
-    cy.get('[data-testid="login-button"]').click();
+    cy.loginViaUI({ name: 'josh', password: '$ecret' });
     cy.get('[data-testid="dashboard-container"]').as('dashboardContainer');
   });
 
