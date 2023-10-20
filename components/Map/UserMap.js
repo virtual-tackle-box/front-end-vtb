@@ -17,7 +17,7 @@ export default function UserMap({ setMarkerPosition }) {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [slideInAnim] = useState(new Animated.Value(0));
-	const [catchMarkers, setCatchMarkers] = useState([])
+	const [catchMarkers, setCatchMarkers] = useState([]);
 	const [catches, setCatches] = useState([]);
 
 	let mapRef = useRef(null);
@@ -40,26 +40,37 @@ export default function UserMap({ setMarkerPosition }) {
 			markerRef.current.showCallout();
 		}
 	}
+	//This will be implemented once we have API calls
+	// useEffect(() => {
+	// 	async function gatherCatchesData() {
+	// 		try {
+	// 			const response = await fetchCatches("url");
+	// 			if (!response.ok) {
+	// 				setErrorMsg("There was an issue gathering catch data");
+	// 			}
+	// 			const data = response.json();
+	// 			setCatches(data);
+	// 		} catch (error) {
+	// 			setErrorMsg(error.msg);
+	// 		}
+	// 	}
+	// }, []);
 
 	useEffect(() => {
-		  
-	
-		  const newCatchMarkers = catches.map(catchData => {
-				return {
-					id: catchData.id,
-					coordinates: {
-						latitude: catchData.latitude,
-						longitude: catchData.longitude,
-					},
-					title: catchData.species,
-					description: catchData.weight,
-				}
-		  })
-			
-			
-		  setCatchMarkers(newCatchMarkers);
-		
-	  }, [catches]);
+		const newCatchMarkers = catches.map((catchData) => {
+			return {
+				id: catchData.id,
+				coordinates: {
+					latitude: catchData.latitude,
+					longitude: catchData.longitude,
+				},
+				title: catchData.species,
+				description: catchData.weight,
+			};
+		});
+
+		setCatchMarkers(newCatchMarkers);
+	}, [catches]);
 
 	useEffect(() => {
 		if (markerRef.current) {
@@ -144,21 +155,19 @@ export default function UserMap({ setMarkerPosition }) {
 	//title species
 	//info weight
 
-	const catchMarkerComponents = catchMarkers.map(marker => (
+	const catchMarkerComponents = catchMarkers.map((marker) => (
 		<Marker
 			key={marker.id}
 			coordinate={marker.coordinates}
 			title={marker.species}
 			description={marker.weight}
-			>
-				<Callout>
-					<Text>{marker.species}</Text>
-					<Text>{marker.weight}</Text>
-				</Callout>
-
-			</Marker>
-
-	))
+		>
+			<Callout>
+				<Text>{marker.species}</Text>
+				<Text>{marker.weight}</Text>
+			</Callout>
+		</Marker>
+	));
 
 	const mapView =
 		onWeb === true ? (
