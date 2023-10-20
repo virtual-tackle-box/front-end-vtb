@@ -35,7 +35,7 @@ export default function AddFish({ formData, updateForm }) {
       {/* LENGTH INPUT */}
       <Text testID='length-input-header'>Length</Text>
       <TextInput
-        testID='fish-length-input'
+        testID='length-input'
         keyboardType='numeric'
         label='Length'
         placeholder='in'

@@ -9,19 +9,25 @@ describe('Add Catch Form', () => {
 
   it('Contains form header', () => {
     cy.contains('ADD CATCH');
-    cy.contains('cancel')
+    cy.contains('Cancel')
   });
 
-  it('Contains all headers', () => {
+  it('Contains all subform headers', () => {
     cy.getBySel('spot-header').should('include.text', 'Fishing Spot');
     cy.getBySel('fish-header').should('include.text', 'Fish Details');
     cy.getBySel('photo-header').should('include.text', 'Select Photo (optional)');
     cy.getBySel('lure-header').should('include.text', 'Lure Details');
   });
 
-  // it('Form inputs contain placeholder text', () => {
-
-  // })
+  it('Form inputs contain placeholder text', () => {
+    cy.testPlaceholder('spot-input', 'i.e. Top Secret Spot #2')
+    
+    cy.testPlaceholder('species-input', 'i.e. Largemouth Bass')
+    cy.testPlaceholder('weight-input', 'lb')
+    cy.testPlaceholder('length-input', 'in')
+    
+    cy.testPlaceholder('lure-input', 'i.e. Topwater Popper')
+  })
 
   // it('Form inputs update with user keyboard input', () => {
   //   cy.getBySel('spot-input').

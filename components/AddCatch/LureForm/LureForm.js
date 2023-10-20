@@ -9,7 +9,8 @@ export default function AddLure({ updateForm, lure }) {
       {/* LURE INPUT */}
       <Text>Lure Used</Text>
       <TextInput
-        label='Species'
+        testID='lure-input'
+        label='Lure'
         placeholder='i.e. Topwater Popper'
         style={styles.input}
         value={lure}
