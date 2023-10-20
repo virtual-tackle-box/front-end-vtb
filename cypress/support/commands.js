@@ -23,3 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('loginViaUI', user => {
+  cy.visit('http://localhost:19006');
+  cy.get('[data-testid="userName-input"]').type(user.name);
+  cy.get('[data-testid="password-input"]').type(user.password);
+  cy.get('[data-testid="login-button"]').click();
+});
+
+Cypress.Commands.add('getBySel', selector => {
+  return cy.get(`[data-testid="${selector}"]`);
+});
