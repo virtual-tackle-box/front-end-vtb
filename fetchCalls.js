@@ -28,7 +28,7 @@ export async function postNewCatch(userID = 1, formData) {
 }
 
 export async function getLures(userID = 1) {
-  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/${userID}/lures/`;
+  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/${userID}/lures`;
 
   try {
     const response = await fetch(url);
@@ -65,6 +65,25 @@ export async function deleteLure(userID = 1, lureID) {
     }
   } catch (error) {
     console.error('An error occurred:', error);
+    return error;
+  }
+}
+
+export async function getCatches(userID = 1) {
+  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/${userID}/catches`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    console.log(responseData);
+    return responseData;
+  } catch (error) {
+    console.error('error: ', error);
     return error;
   }
 }
