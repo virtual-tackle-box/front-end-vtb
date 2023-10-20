@@ -45,3 +45,26 @@ export async function getLures(userID) {
     console.error('error: ', error);
   }
 }
+
+export async function deleteLure(lureID) {
+  const url = `https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/lures/${lureID}`;
+
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+
+    if (response.ok) {
+      console.log('Resource deleted successfully.');
+    } else {
+      console.error('Failed to delete resource.');
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
