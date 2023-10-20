@@ -88,7 +88,7 @@ export default function CameraScreen({ updateForm }) {
     <View style={styles.uploadPhoto}>
       {/* TOP NAV BAR */}
       <View testID='camera-view-top-nav-bar' style={styles.cameraTopBar}>
-        <Text style={{ fontSize: 24 }}>Select Photo (optional)</Text>
+        <Text testID='photo-header' style={{ fontSize: 24 }}>Select Photo (optional)</Text>
       </View>
       {/* CAMERA MANAGEMENT OPTIONS */}
       <View style={styles.cameraManagementOptions}>
