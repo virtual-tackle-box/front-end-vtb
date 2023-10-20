@@ -12,23 +12,36 @@ export default function SignUp() {
 
 	const navigation = useNavigation();
 
-	function handleLogin(name, password) {
-		if (!name || !password) {
-			return;
-		} else {
-			navigation.navigate("Dashboard");
-		}
+	// function handleLogin(name, password) {
+	// 	if (!name || !password) {
+	// 		return;
+	// 	} else {
+	// 		navigation.navigate("Dashboard");
+	// 	}
+	// }
+
+	function validatePhoneNumber() {
+		const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+		return re.test(number);
 	}
 
+    function validateEmail() {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+      }
+
 	function validateForm() {
-		if (!email) {
-			setErrorMsg("Please enter an email address");
+		if (!email || !validateEmail()) {
+			setErrorMsg("Please enter a valid email address");
 			return false;
 		} else if (password.length < 1) {
 			setErrorMsg("Please enter a password");
-            return false;
+			return false;
 		} else if (password !== passwordConfirm) {
 			setErrorMsg("Passwords do not match");
+			return false;
+		} else if (number.length > 0 && !validatePhoneNumber()) {
+			setErrorMsg("Please enter a valid phone number");
 			return false;
 		} else {
 			return true;
