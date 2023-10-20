@@ -7,16 +7,16 @@ describe('Add Catch Form', () => {
     cy.getBySel('fish-fins-icon').click();
   });
 
-  it.skip('Contains required form fields disclaimer', () => {
+  it('Contains required form fields disclaimer', () => {
     cy.contains('* indicates a required form field');
   });
 
-  it.skip('Contains form header', () => {
+  it('Contains form header', () => {
     cy.contains('ADD CATCH');
     cy.contains('Cancel');
   });
 
-  it.skip('Contains all subform headers', () => {
+  it('Contains all subform headers', () => {
     cy.getBySel('spot-header').should('include.text', 'Fishing Spot');
     cy.getBySel('fish-header').should('include.text', 'Fish Details');
     cy.getBySel('photo-header').should(
