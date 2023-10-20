@@ -3,7 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import AddCatch from './components/AddCatch/AddCatch';
+
 import SignUp from './components/SignUp/SignUp';
+
+import AddLure from './components/AddLure/AddLure';
+
 
 const Stack = createStackNavigator();
 
@@ -38,6 +42,13 @@ export default function App() {
             headerShown: false
           }}
           component={AddCatch}
+        />
+        <Stack.Screen
+          name='AddLure'
+          options={{
+            headerShown: false
+          }}
+          component={AddLure}
         />
       </Stack.Navigator>
     </NavigationContainer>
