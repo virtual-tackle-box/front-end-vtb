@@ -50,6 +50,4 @@ describe('Add Catch Form', () => {
   it('Contains the Submit button', () => {
     cy.getBySel('submit-button').should('be.visible')
   });
-
-  // it('Opens and closes the gallery')
 });
