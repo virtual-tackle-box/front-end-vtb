@@ -34,3 +34,9 @@ Cypress.Commands.add('loginViaUI', user => {
 Cypress.Commands.add('getBySel', selector => {
   return cy.get(`[data-testid="${selector}"]`);
 });
+
+Cypress.Commands.add('testPlaceholder', (selector, placeholder) => {
+  return cy
+    .get(`[data-testid="${selector}"`)
+    .should('have.attr', 'Placeholder', `${placeholder}`);
+});
