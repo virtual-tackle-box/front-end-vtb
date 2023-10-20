@@ -8,22 +8,22 @@ import AddLure from './LureForm/LureForm';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 import AddSpot from './AddSpot/AddSpot';
+import { useNavigation } from '@react-navigation/native';
 
-// check in with Banjo about passing lat and lon in
-export default function AddCatch({route}) {
-  const {lat,lon} = route.params;
-  console.log("LAT",lat)
-  console.log("LON",lon)
+export default function AddCatch({ route }) {
+  const navigation = useNavigation();
+  const { lat, lon } = route.params;
   const [formData, setFormData] = useState({
-    spot: '',
-    lat,
-    lon,
+    spot_name: '',
+    latitude: lat,
+    longitude: lon,
     species: '',
     weight: 0.0,
     length: 0.0,
     lure: '',
-    url: ''
+    photo_url: ''
   });
+  const [error, setError] = useState('');
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -34,24 +34,73 @@ export default function AddCatch({route}) {
     });
   }
 
-  useEffect(() => {
-    console.log(JSON.stringify(formData, null, 2));
-  }, [formData])
+  async function submitForm() {
+    if (!formData.spot_name.length || !formData.species.length) {
+      setError('Please fill out required form fields.');
+      return;
+    }
+
+    const url =
+      'https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/catches';
+
+    const data = {
+      catch: formData
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+    } catch (error) {
+      setError(error.message);
+      console.log('error: ', error);
+    }
+  }
+
+  function navToDash() {
+    navigation.navigate('Dashboard');
+  }
 
   return (
     <>
       <Header
-        leftComponent={{ text: 'Cancel' }} // needs event handler
+        leftComponent={
+          <TouchableOpacity onPress={navToDash}>
+            <Text>Cancel</Text>
+          </TouchableOpacity>
+          // { text: 'Cancel' }
+        }
         centerComponent={{ text: 'ADD CATCH', style: { fontSize: 25 } }}
         backgroundColor='#F0EAD6'
       />
-      <ScrollView style={{ height: '100%', backgroundColor: '#F0EAD6' }}>
+      <ScrollView
+        testID='catch-form-container'
+        style={{ height: '100%', backgroundColor: '#F0EAD6' }}
+      >
+        <Text style={{ marginLeft: 10 }}>
+          * indicates a required form field
+        </Text>
         <AddSpot updateForm={updateForm} spot={formData.spot} />
         <AddFish formData={formData} updateForm={updateForm} />
-        <CameraScreen updateForm={updateForm} />
         <AddLure updateForm={updateForm} lure={formData.lure} />
-        <TouchableOpacity style={styles.submitButton}>
-          <Text style={{ fontSize: 24 }}>Submit</Text>
+        <CameraScreen updateForm={updateForm} />
+        {error && <Text style={{ marginLeft: 45 }}>{error}</Text>}
+        <TouchableOpacity style={styles.submitButton} onPress={submitForm}>
+          <Text testID='submit-button' style={{ fontSize: 24 }}>
+            Submit
+          </Text>
         </TouchableOpacity>
       </ScrollView>
     </>
