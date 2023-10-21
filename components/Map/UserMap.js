@@ -40,21 +40,25 @@ export default function UserMap({ setMarkerPosition }) {
 			markerRef.current.showCallout();
 		}
 	}
-	//This will be implemented once we have API calls
-	// useEffect(() => {
-	// 	async function gatherCatchesData() {
-	// 		try {
-	// 			const response = await fetchCatches("url");
-	// 			if (!response.ok) {
-	// 				setErrorMsg("There was an issue gathering catch data");
-	// 			}
-	// 			const data = response.json();
-	// 			setCatches(data);
-	// 		} catch (error) {
-	// 			setErrorMsg(error.msg);
-	// 		}
-	// 	}
-	// }, []);
+
+	async function fetchCatches(){
+		const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/1/catches`
+		try{
+		const response = await fetch(url);
+		if(!response.ok){
+			throw new Error("Fetch Error")
+		}
+		const data = response.json();
+		console.log("response data",data);
+	}catch (error){
+		setErrorMsg(error.message)
+	}
+	}
+
+	// This will be implemented once we have API calls
+	useEffect(() => {
+		fetchCatches();
+	}, []);
 
 	useEffect(() => {
 		const newCatchMarkers = catches.map((catchData) => {
@@ -82,6 +86,7 @@ export default function UserMap({ setMarkerPosition }) {
 
 	useEffect(() => {
 		if (mapRef.current && location !== "denied") {
+			console.log("Animate")
 			mapRef.current.animateToRegion(
 				{
 					latitude: location.coords.latitude,
@@ -89,15 +94,15 @@ export default function UserMap({ setMarkerPosition }) {
 					latitudeDelta: 0.01,
 					longitudeDelta: 0.01,
 				},
-				2000
+				1000
 			);
 		} else if (mapRef.current && location === "denied") {
 			mapRef.current.animateToRegion(
 				{
 					latitude: 39.8283,
-					longitude: 98.5795,
-					latitudeDelta: 14,
-					longitudeDelta: 14,
+					longitude: -98.5795,
+					latitudeDelta: 45,
+					longitudeDelta: 45,
 				},
 				1000
 			);
@@ -190,7 +195,17 @@ export default function UserMap({ setMarkerPosition }) {
 			</Animated.View>
 		) : (
 			<Animated.View style={[styles.container, slideInStyle]}>
-				<MapView ref={mapRef} style={styles.map} mapType="satellite">
+				<MapView
+					ref={mapRef}
+					style={styles.map}
+					region={{
+						latitude: 39.8283,
+						longitude: -98.5795,
+						latitudeDelta: 45,
+						longitudeDelta: 45,
+					}}
+					mapType="satellite"
+				>
 					<Marker
 						ref={markerRef}
 						coordinate={{
