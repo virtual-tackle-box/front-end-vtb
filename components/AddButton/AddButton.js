@@ -78,7 +78,7 @@ export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 						toggleForm();
 					}}
 				>
-					<Text style={styles.buttonText}>Add Catch</Text>
+					<Text testID="fish-fins-icon" style={styles.buttonText}>Add Catch</Text>
 					{/* <Icon testID="fish-fins-icon" name="book" size={35} color="white" /> */}
 				</TouchableOpacity>
 				</ImageBackground>
@@ -91,7 +91,7 @@ export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 						navigateToLure();
 					}}
 				>
-					<Text style={styles.buttonText} >Add Lure</Text>
+					<Text testID="lure-icon" style={styles.buttonText} >Add Lure</Text>
 					{/* <Icon testID="lure-icon" name="superpowers" size={35} color="white" /> */}
 				</TouchableOpacity>
 				</ImageBackground>
