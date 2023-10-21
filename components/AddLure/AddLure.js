@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { styles } from "./AddLureStylesheet";
 import LureForm from "./LureForm/LureForm";
 import LureImage from "./lureiconNobackground.png";
+import { postNewLure } from "../../fetchCalls";
 
 export default function AddLure() {
 	const [errorMsg, setErrorMsg] = useState("");
@@ -21,9 +22,7 @@ export default function AddLure() {
 		weight: "",
 	});
 
-    function postData(){
-
-    }
+    
 
 	function updateForm(name, value) {
 		setFormData((prev) => {
@@ -49,18 +48,10 @@ export default function AddLure() {
             return;
 		}
         setErrorMsg('')
-		const data = formData;
-		const url = "";
-
-		const postObj = {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		};
+		
+		
 		try {
-			const response = await postData(url, postObj);
+			const response = await postNewLure('userID', formData);
 
 			if (!response.ok) {
 				throw new Error("There was an issue adding your lure.");
