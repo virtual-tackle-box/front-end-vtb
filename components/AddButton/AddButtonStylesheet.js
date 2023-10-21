@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
         width: '100%',
         borderRadius: 30,
     },
-
+    
+    
     circleButton: {
         backgroundColor: 'black',
         width: 60,

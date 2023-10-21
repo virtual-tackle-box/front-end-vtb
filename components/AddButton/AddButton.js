@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StyleSheet, Animated } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Animated, Text } from "react-native";
 import { styles } from './AddButtonStylesheet'
 import { useState } from "react";
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -48,14 +48,16 @@ export default function AddButton({toggleForm}){
 
     return (
         <View style={styles.mainContainer}>
-            <Animated.View style={[styles.circleButton, {bottom: addFish}]}>
+            <Animated.View style={[styles.buttonContainer, {bottom: addFish, opacity : isMenuOpen ? 1 : 0}]}>
                 <TouchableOpacity onPress={() => toggleForm()}>
                     <Icon testID='fish-fins-icon' name='book' size={35} color='white'/>
                 </TouchableOpacity>
+										{/* <Text style={styles.buttonText}>Add catch</Text> */}
             </Animated.View>
-            <Animated.View style={[styles.circleButton, {bottom: addLure}]}>
+            <Animated.View style={[styles.buttonContainer, {bottom: addLure, opacity : isMenuOpen ? 1 : 0}]}>
                 <TouchableOpacity onPress={() => navigateToLure()}>
                     <Icon testID='lure-icon' name='superpowers' size={35} color='white'/>
+										{/* <Text style={styles.buttonText}>Add lure</Text> */}
                 </TouchableOpacity>
             </Animated.View>
             
