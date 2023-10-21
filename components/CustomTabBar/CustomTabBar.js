@@ -37,7 +37,11 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 				};
 
 				return (
-					<View testID='dashboard-icon' key={index} style={styles.iconContainer}>
+					<View
+						testID="dashboard-icon"
+						key={index}
+						style={styles.iconContainer}
+					>
 						<Pressable
 							onPress={handlePress}
 							style={{
@@ -54,12 +58,15 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 								}}
 							>
 								<Icon
-                  testID={`fa-icon-${label}`}
+									testID={`fa-icon-${label}`}
 									name={label}
 									size={30}
 									color={isFocused ? "green" : "gray"}
 								/>
-								<Text testID={label} style={{ color: isFocused ? "white" : "gray" }}>
+								<Text
+									testID={label}
+									style={{ color: isFocused ? "white" : "gray" }}
+								>
 									{label}
 								</Text>
 							</View>
