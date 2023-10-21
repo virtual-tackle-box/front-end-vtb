@@ -12,6 +12,7 @@ import { styles } from "./UserMapStylesheet";
 import * as Location from "expo-location";
 import { useIsFocused } from "@react-navigation/native";
 import UsaMap from "./usaMap.jpeg";
+import { getCatches } from "../../fetchCalls";
 
 export default function UserMap({ setMarkerPosition }) {
 	const [location, setLocation] = useState(null);
@@ -41,23 +42,14 @@ export default function UserMap({ setMarkerPosition }) {
 		}
 	}
 
-	async function fetchCatches(){
-		const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/1/catches`
-		try{
-		const response = await fetch(url);
-		if(!response.ok){
-			throw new Error("Fetch Error")
-		}
-		const data = response.json();
-		console.log("response data",data);
-	}catch (error){
-		setErrorMsg(error.message)
-	}
-	}
 
 	// This will be implemented once we have API calls
 	useEffect(() => {
-		fetchCatches();
+		async function gatherCatchData(){
+			const catchData = await getCatches();
+			setCatches(catchData.data)
+		}
+		gatherCatchData();
 	}, []);
 
 	useEffect(() => {
@@ -65,14 +57,14 @@ export default function UserMap({ setMarkerPosition }) {
 			return {
 				id: catchData.id,
 				coordinates: {
-					latitude: catchData.latitude,
-					longitude: catchData.longitude,
+					latitude: catchData.attributes.latitude,
+					longitude: catchData.attributes.longitude,
 				},
-				title: catchData.species,
-				description: catchData.weight,
+				species: catchData.attributes.species,
+				weight: catchData.attributes.weight,
+				length: catchData.attributes.length
 			};
 		});
-
 		setCatchMarkers(newCatchMarkers);
 	}, [catches]);
 
@@ -86,7 +78,6 @@ export default function UserMap({ setMarkerPosition }) {
 
 	useEffect(() => {
 		if (mapRef.current && location !== "denied") {
-			console.log("Animate")
 			mapRef.current.animateToRegion(
 				{
 					latitude: location.coords.latitude,
@@ -157,22 +148,18 @@ export default function UserMap({ setMarkerPosition }) {
 		],
 	};
 
-	//title species
-	//info weight
 
-	const catchMarkerComponents = catchMarkers.map((marker) => (
-		<Marker
+	const catchMarkerComponents = catchMarkers.map((marker) => {
+		return (<Marker
 			key={marker.id}
 			coordinate={marker.coordinates}
-			title={marker.species}
-			description={marker.weight}
 		>
 			<Callout>
 				<Text>{marker.species}</Text>
-				<Text>{marker.weight}</Text>
+				<Text>{marker.length}in     {marker.weight}lbs</Text>
 			</Callout>
 		</Marker>
-	));
+	)});
 
 	const mapView =
 		onWeb === true ? (

@@ -5,8 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import fishIcon from './fishIconNoBack.png'
 
-export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
-	const navigation = useNavigation();
+
 export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 	const navigation = useNavigation();
 
