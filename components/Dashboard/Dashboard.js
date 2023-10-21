@@ -14,10 +14,10 @@ const Tab = createBottomTabNavigator();
 export default function Dashboard() {
   const [showMarker, setShowMarker] = useState(false);
   const navigation = useNavigation();
-  console.log('Show marker in dashboard', showMarker);
+  
   const [markerPosition, setMarkerPosition] = useState('');
 
-  console.log('MARKER POSITION IN DASH', markerPosition);
+
 
   function toggleForm() {
     console.log('MARKER POSITION IN TOGGLE', markerPosition);

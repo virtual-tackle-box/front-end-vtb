@@ -18,7 +18,7 @@ export default function CatchLog() {
   const navigation = useNavigation();
 
   function navToBooks() {
-    navigation.navigate('BooksDashboard');
+    navigation.navigate('book');
   }
 
   async function fetchCatches() {
