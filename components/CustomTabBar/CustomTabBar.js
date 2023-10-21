@@ -21,7 +21,7 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 				if (route.name === "Fake") {
 					return (
 						<View key={index}>
-							<AddButton toggleForm={toggleForm} tabPressed={tabPressed} />
+							<AddButton toggleForm={toggleForm} tabPressed={tabPressed} setTabPressed={setTabPressed} />
 						</View>
 					);
 				}
@@ -36,7 +36,8 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 					});
 
 					if (!isFocused && !event.defaultPrevented) {
-						setTabPressed(false);
+						console.log("Navigation")
+						setTabPressed(true);
 						navigation.navigate(route.name);
 					}
 				};

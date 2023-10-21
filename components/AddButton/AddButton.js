@@ -1,10 +1,10 @@
 import { View, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import { styles } from "./AddButtonStylesheet";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 
-export default function AddButton({ toggleForm, tabPressed }) {
+export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 	const navigation = useNavigation();
 
 	const [addFish] = useState(new Animated.Value(40));
@@ -44,11 +44,12 @@ export default function AddButton({ toggleForm, tabPressed }) {
 		}).start();
 	};
 
-	// useEffect(() => {
-	// 	if(tabPressed){
-	// 		closeMenu();
-	// 	}
-	// },[tabPressed])
+	useEffect(() => {
+		if(tabPressed){
+			closeMenu();
+			setTabPressed(false);
+		}
+	},[tabPressed])
 
 	return (
 		<View style={styles.mainContainer}>
