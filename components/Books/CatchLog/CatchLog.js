@@ -8,7 +8,7 @@ import {
 import { Header } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { getCatches } from '../../../fetchCalls';
+import { deleteCatch, getCatches } from '../../../fetchCalls';
 
 import { CatchLogStylesheet as styles } from './CatchLogStylesheet';
 
@@ -21,13 +21,17 @@ export default function CatchLog() {
     navigation.navigate('book');
   }
 
-  useEffect(() => {
-    async function fetchCatches() {
-      const catches = await getCatches();
-      // console.log(JSON.stringify(catches, null, 2));
-      setCatches(catches.data);
-    }
+  async function fetchCatches() {
+    const catches = await getCatches();
+    setCatches(catches.data);
+  }
 
+  async function delCatch(id) {
+    await deleteCatch(undefined, id);
+    fetchCatches();
+  }
+
+  useEffect(() => {
     fetchCatches();
   }, []);
 
@@ -46,6 +50,9 @@ export default function CatchLog() {
 
     return (
       <View style={styles.catchCard} key={id} testID={`${id}`}>
+        <TouchableOpacity onPress={() => delCatch(id)}>
+          <Text>X</Text>
+        </TouchableOpacity>
         <View>
           <Text>Species: {species}</Text>
           <Text>Weight: {weight}</Text>
@@ -73,9 +80,7 @@ export default function CatchLog() {
         backgroundColor='#F0EAD6'
       />
       <ScrollView style={{ height: '100%', backgroundColor: '#F0EAD6' }}>
-        <View style={styles.catchCardContainer}>
-          {catches && catchCards}
-        </View>
+        <View style={styles.catchCardContainer}>{catches && catchCards}</View>
       </ScrollView>
     </SafeAreaView>
   );
