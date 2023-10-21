@@ -22,6 +22,7 @@ export default function AddLure() {
 		weight: "",
 	});
 
+
     
 
 	function updateForm(name, value) {
@@ -53,9 +54,9 @@ export default function AddLure() {
 		try {
 			const response = await postNewLure('userID', formData);
 
-			if (!response.ok) {
-				throw new Error("There was an issue adding your lure.");
-			}
+			
+            setErrorMsg("")
+            navigation.navigate('book')
 		} catch (error){
             setErrorMsg(error.message);
         }
