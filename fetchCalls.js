@@ -46,6 +46,24 @@ export async function getCatches(userID = 1) {
   }
 }
 
+export async function deleteCatch(userID = 1, lureID) {
+  const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/${userID}/catches/${lureID}`;
+
+  try {
+    const response = await fetch(url, { method: 'DELETE' });
+
+    if (response.ok) {
+      console.log('response status: ', response.status);
+      console.log('Resource deleted successfully.');
+    } else {
+      console.error('Failed to delete resource.');
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+    return error;
+  }
+}
+
 export async function getLures(userID = 1) {
   const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/${userID}/lures`;
 
