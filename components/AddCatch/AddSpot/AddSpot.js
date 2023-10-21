@@ -17,7 +17,7 @@ export default function AddSpot({ spot, updateForm }) {
         placeholder='i.e. Top Secret Spot #2'
         style={styles.input}
         value={spot}
-        onChangeText={text => updateForm('spot', text)}
+        onChangeText={text => updateForm('spot_name', text)}
       />
     </View>
   );
