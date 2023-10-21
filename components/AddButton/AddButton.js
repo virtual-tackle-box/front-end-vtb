@@ -4,7 +4,7 @@ import { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 
-export default function AddButton({ toggleForm }) {
+export default function AddButton({ toggleForm, tabPressed }) {
 	const navigation = useNavigation();
 
 	const [addFish] = useState(new Animated.Value(40));
@@ -43,6 +43,12 @@ export default function AddButton({ toggleForm }) {
 			useNativeDriver: false,
 		}).start();
 	};
+
+	// useEffect(() => {
+	// 	if(tabPressed){
+	// 		closeMenu();
+	// 	}
+	// },[tabPressed])
 
 	return (
 		<View style={styles.mainContainer}>
