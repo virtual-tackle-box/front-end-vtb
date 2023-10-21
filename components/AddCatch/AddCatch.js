@@ -1,14 +1,16 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Header } from 'react-native-elements';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import CameraScreen from './UploadPhoto/UploadPhoto';
 import AddFish from './AddFish/AddFish';
 import AddLure from './LureForm/LureForm';
+import AddSpot from './AddSpot/AddSpot';
+
+import { postNewCatch } from '../../fetchCalls';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
-import AddSpot from './AddSpot/AddSpot';
-import { useNavigation } from '@react-navigation/native';
 
 export default function AddCatch({ route }) {
   const navigation = useNavigation();
@@ -40,33 +42,7 @@ export default function AddCatch({ route }) {
       return;
     }
 
-    const url =
-      'https://083f9844-df93-46cf-bd2d-0d9386929d6d.mock.pstmn.io/api/v1/users/1/catches';
-
-    const data = {
-      catch: formData
-    };
-
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    };
-
-    try {
-      const response = await fetch(url, options);
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const responseData = await response.json();
-    } catch (error) {
-      setError(error.message);
-      console.log('error: ', error);
-    }
+    postNewCatch(undefined, formData)
   }
 
   function navToDash() {
