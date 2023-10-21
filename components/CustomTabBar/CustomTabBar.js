@@ -1,4 +1,5 @@
 import React from "react";
+import {useState} from "react";
 import {
 	View,
 	Pressable,
@@ -11,13 +12,16 @@ import { styles } from "./CustomTabBarStylessheet";
 import AddButton from "../AddButton/AddButton";
 
 function TabBar({ state, descriptors, navigation, toggleForm }) {
+
+	const [tabPressed, setTabPressed] = useState(false);
+
 	return (
 		<View testID="dashboard-container" style={styles.mainContainer}>
 			{state.routes.map((route, index) => {
 				if (route.name === "Fake") {
 					return (
 						<View key={index}>
-							<AddButton toggleForm={toggleForm} />
+							<AddButton toggleForm={toggleForm} tabPressed={tabPressed} setTabPressed={setTabPressed} />
 						</View>
 					);
 				}
@@ -32,12 +36,18 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 					});
 
 					if (!isFocused && !event.defaultPrevented) {
+						console.log("Navigation")
+						setTabPressed(true);
 						navigation.navigate(route.name);
 					}
 				};
 
 				return (
-					<View testID='dashboard-icon' key={index} style={styles.iconContainer}>
+					<View
+						testID="dashboard-icon"
+						key={index}
+						style={styles.iconContainer}
+					>
 						<Pressable
 							onPress={handlePress}
 							style={{
@@ -54,12 +64,15 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 								}}
 							>
 								<Icon
-                  testID={`fa-icon-${label}`}
+									testID={`fa-icon-${label}`}
 									name={label}
 									size={30}
 									color={isFocused ? "green" : "gray"}
 								/>
-								<Text testID={label} style={{ color: isFocused ? "white" : "gray" }}>
+								<Text
+									testID={label}
+									style={{ color: isFocused ? "white" : "gray" }}
+								>
 									{label}
 								</Text>
 							</View>

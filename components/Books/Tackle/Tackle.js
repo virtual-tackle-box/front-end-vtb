@@ -27,7 +27,7 @@ export default function CatchLog() {
   }, []);
 
   function navToBooks() {
-    navigation.navigate('BooksDashboard');
+    navigation.navigate('book');
   }
 
   const lureCards = lures.map(lure => {

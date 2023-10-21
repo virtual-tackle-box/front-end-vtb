@@ -72,13 +72,13 @@ export default function App() {
           component={CatchLog}
         />
 
-        <Stack.Screen
+        {/* <Stack.Screen
           name='BooksDashboard'
           options={{
             headerShown: false
           }}
           component={BooksDashboard}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
