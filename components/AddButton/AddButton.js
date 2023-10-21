@@ -7,6 +7,8 @@ import fishIcon from './fishIconNoBack.png'
 
 export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 	const navigation = useNavigation();
+export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
+	const navigation = useNavigation();
 
 	const [addFish] = useState(new Animated.Value(40));
 	const [addLure] = useState(new Animated.Value(40));
