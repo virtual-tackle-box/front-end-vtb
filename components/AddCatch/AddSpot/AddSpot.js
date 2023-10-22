@@ -2,6 +2,8 @@ import { Text, TextInput, View } from 'react-native';
 
 import { AddSpotStylesheet as styles } from './AddSpotStylesheet';
 
+import PropTypes from 'prop-types';
+
 export default function AddSpot({ spot, updateForm }) {
   return (
     <View style={styles.container}>
@@ -22,3 +24,8 @@ export default function AddSpot({ spot, updateForm }) {
     </View>
   );
 }
+
+AddSpot.propTypes = {
+  spot: PropTypes.string.isRequired,
+  updateForm: PropTypes.func.isRequired
+};

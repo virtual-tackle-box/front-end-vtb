@@ -75,7 +75,7 @@ export default function AddCatch({ route }) {
         <Text style={{ marginLeft: 10 }}>
           * indicates a required form field
         </Text>
-        <AddSpot updateForm={updateForm} spot={formData.spot} />
+        <AddSpot updateForm={updateForm} spot={formData.spot_name} />
         <AddFish
           formData={{
             species: formData.species,
