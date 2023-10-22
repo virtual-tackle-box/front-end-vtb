@@ -13,7 +13,7 @@ export default function CameraScreen({ updateForm }) {
 
   const [camera, setCamera] = useState(null);
   const [cameraOpen, setCameraOpen] = useState(false);
-  const [imageUri, setImageUri] = useState(null);
+  const [image, setImage] = useState({});
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   async function getPermissions() {
@@ -34,14 +34,16 @@ export default function CameraScreen({ updateForm }) {
 
   async function takePicture() {
     if (camera) {
-      const photo = await camera.takePictureAsync(null);
+      const photo = await camera.takePictureAsync(
+        (options = { base64: true, quality: 1 })
+      );
       // give feedback to user that pic was taken:
       // make a View that overlays the camera window
       // set it to animate to a dark opacity of grey
       // fade out to 0 opacity
       setCameraOpen(false);
-      setImageUri(photo.uri);
-      updateForm('url', photo.uri);
+      setImage({ localUri: photo.uri });
+      updateForm('local_url', photo.base64);
     }
   }
 
@@ -50,13 +52,14 @@ export default function CameraScreen({ updateForm }) {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [1, 1],
-      quality: 1
+      quality: 1,
+      base64: true
     });
 
     if (!result.canceled) {
       setCameraOpen(false);
-      setImageUri(result.assets?.[0].uri || result.uri);
-      updateForm('url', result.assets?.[0].uri || result.uri);
+      setImage({ localUri: result.assets?.[0].uri || result.uri });
+      updateForm('local_url', result.assets?.[0].base64 || result.base64);
     }
   }
 
@@ -79,7 +82,6 @@ export default function CameraScreen({ updateForm }) {
             name='circle-thin'
             color={'lightgrey'}
             style={{ fontSize: 60, alignSelf: 'center' }}
-            // move icon down a little bit
           ></Icon>
         </TouchableOpacity>
       </View>
@@ -89,11 +91,17 @@ export default function CameraScreen({ updateForm }) {
     <View style={styles.uploadPhoto}>
       {/* TOP NAV BAR */}
       <View testID='camera-view-top-nav-bar' style={styles.cameraTopBar}>
-        <Text testID='photo-header' style={{ fontSize: 24 }}>Select Photo (optional)</Text>
+        <Text testID='photo-header' style={{ fontSize: 24 }}>
+          Select Photo (optional)
+        </Text>
       </View>
       {/* CAMERA MANAGEMENT OPTIONS */}
       <View style={styles.cameraManagementOptions}>
-        <TouchableOpacity testID='gallery-button' onPress={pickImage} style={styles.button}>
+        <TouchableOpacity
+          testID='gallery-button'
+          onPress={pickImage}
+          style={styles.button}
+        >
           <Text>Gallery</Text>
         </TouchableOpacity>
         <Icon
@@ -107,8 +115,8 @@ export default function CameraScreen({ updateForm }) {
       {cameraOpen && cameraComponent}
       {/* MEDIA VIEWING CONTAINER */}
       <View style={styles.mediaContainer}>
-        {imageUri && !cameraOpen && (
-          <Image source={{ uri: imageUri }} style={styles.image} />
+        {image && !cameraOpen && (
+          <Image source={{ uri: image.localUri }} style={styles.image} />
         )}
       </View>
     </View>

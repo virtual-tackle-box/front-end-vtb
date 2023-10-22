@@ -8,7 +8,7 @@ import AddFish from './AddFish/AddFish';
 import AddLure from './LureForm/LureForm';
 import AddSpot from './AddSpot/AddSpot';
 
-import { postNewCatch } from '../../fetchCalls';
+import { postNewCatch, postImageToCloudinary } from '../../fetchCalls';
 import { useUserContext } from '../UserContext/UserContext';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
@@ -24,7 +24,8 @@ export default function AddCatch({ route }) {
     weight: 0.0,
     length: 0.0,
     lure: '',
-    photo_url: ''
+    local_url: '',
+    cloudinary_urls: []
   });
   const [error, setError] = useState('');
 
@@ -45,7 +46,11 @@ export default function AddCatch({ route }) {
       return;
     }
 
-    postNewCatch(userID, formData)
+    if (formData.local_url.length) {
+      const cloudURL = await postImageToCloudinary(formData.local_url);
+      setFormData(formData.cloudinary_urls.push(cloudURL.url));
+    }
+    postNewCatch(userID, formData);
   }
 
   function navToDash() {

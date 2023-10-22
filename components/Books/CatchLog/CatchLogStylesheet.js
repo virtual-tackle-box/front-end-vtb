@@ -4,15 +4,15 @@ export const CatchLogStylesheet = StyleSheet.create({
   catchCardContainer: {
     alignItems: 'center',
     marginTop: 50,
+    marginBottom: 150,
     gap: 10
   },
 
   catchCard: {
-    // flexDirection: 'row',
     justifyContent: 'space-around',
     gap: 15,
 
-    backgroundColor: 'olive',
+    backgroundColor: '#808000',
     shadowColor: '#000',
     shadowOffset: {
       width: 6,
@@ -25,5 +25,29 @@ export const CatchLogStylesheet = StyleSheet.create({
     borderRadius: '8px',
 
     width: '80%'
+  },
+
+  delBtnContainer: {
+    width: 35,
+    height: 35,
+
+    borderRadius: '5px',
+
+    backgroundColor: '#5e5e01',
+
+    marginLeft: 12,
+    marginTop: 5
+  },
+
+  delBtn: {
+    fontSize: 20,
+    paddingLeft: 11,
+    paddingTop: 5
+  },
+
+  image: {
+    width: 300,
+    height: 300,
+    alignSelf: 'center'
   }
 });

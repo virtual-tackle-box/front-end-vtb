@@ -3,20 +3,20 @@ import {
   View,
   ScrollView,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 import { Header } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { deleteCatch, getCatches } from '../../../fetchCalls';
-import { useUserContext } from "../../UserContext/UserContext"
+import { useUserContext } from '../../UserContext/UserContext';
 
 import { CatchLogStylesheet as styles } from './CatchLogStylesheet';
 
 export default function CatchLog() {
   const [catches, setCatches] = useState([]);
-  const {userID} = useUserContext();
-  
+  const { userID } = useUserContext();
 
   const navigation = useNavigation();
 
@@ -40,22 +40,27 @@ export default function CatchLog() {
 
   const catchCards = catches.map(c => {
     const { id } = c;
-    const {
-      species,
-      weight,
-      length,
-      spot_name,
-      latitude,
-      longitude,
-      lure,
-      photo_url
-    } = c.attributes;
+    const { species, weight, length, spot_name, lure, cloudinary_urls } =
+      c.attributes;
+
+    const image = (
+      <View>
+        <Image
+          source={{ uri: cloudinary_urls?.[0] }}
+          style={styles.image}
+        ></Image>
+      </View>
+    );
 
     return (
       <View style={styles.catchCard} key={id} testID={`${id}`}>
-        <TouchableOpacity onPress={() => delCatch(id)}>
-          <Text>X</Text>
+        <TouchableOpacity
+          style={styles.delBtnContainer}
+          onPress={() => delCatch(id)}
+        >
+          <Text style={styles.delBtn}>X</Text>
         </TouchableOpacity>
+        {cloudinary_urls?.length && image}
         <View>
           <Text>Species: {species}</Text>
           <Text>Weight: {weight}</Text>
@@ -65,7 +70,7 @@ export default function CatchLog() {
           <Text>Fishing Spot: {spot_name}</Text>
         </View>
         <View>
-          <Text>Lure: {lure}</Text>
+          <Text>Lure: {lure || 'unspecified'}</Text>
         </View>
       </View>
     );
