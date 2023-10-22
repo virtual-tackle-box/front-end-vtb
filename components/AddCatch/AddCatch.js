@@ -9,6 +9,7 @@ import AddLure from './LureForm/LureForm';
 import AddSpot from './AddSpot/AddSpot';
 
 import { postNewCatch, postImageToCloudinary } from '../../fetchCalls';
+import { useUserContext } from '../UserContext/UserContext';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 
@@ -27,6 +28,8 @@ export default function AddCatch({ route }) {
     cloudinary_urls: [] // push to array
   });
   const [error, setError] = useState('');
+
+  const {userID} = useUserContext();
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -47,7 +50,7 @@ export default function AddCatch({ route }) {
       const cloudURL = await postImageToCloudinary(formData.local_url);
       setFormData(formData.cloudinary_urls.push(cloudURL.url));
     }
-    postNewCatch(undefined, formData);
+    postNewCatch(userID, formData);
   }
 
   function navToDash() {

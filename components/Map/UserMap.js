@@ -13,6 +13,7 @@ import * as Location from "expo-location";
 import { useIsFocused } from "@react-navigation/native";
 import UsaMap from "./usaMap.jpeg";
 import { getCatches } from "../../fetchCalls";
+import { useUserContext } from "../UserContext/UserContext";
 
 export default function UserMap({ setMarkerPosition }) {
 	const [location, setLocation] = useState(null);
@@ -20,6 +21,7 @@ export default function UserMap({ setMarkerPosition }) {
 	const [slideInAnim] = useState(new Animated.Value(0));
 	const [catchMarkers, setCatchMarkers] = useState([]);
 	const [catches, setCatches] = useState([]);
+	const {userID} = useUserContext();
 
 	let mapRef = useRef(null);
 	let markerRef = useRef(null);
@@ -41,12 +43,12 @@ export default function UserMap({ setMarkerPosition }) {
 			markerRef.current.showCallout();
 		}
 	}
-
+	console.log("CATCHES", catches)
 
 	// This will be implemented once we have API calls
 	useEffect(() => {
 		async function gatherCatchData(){
-			const catchData = await getCatches();
+			const catchData = await getCatches(userID);
 			setCatches(catchData.data)
 		}
 		gatherCatchData();

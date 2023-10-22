@@ -8,6 +8,7 @@ import UserMap from '../Map/UserMap';
 import AddButton from '../AddButton/AddButton';
 import { useNavigation } from '@react-navigation/native';
 import BooksDashboard from '../Books/BooksDashboard';
+import { useUserContext } from '../UserContext/UserContext';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ export default function Dashboard() {
   const navigation = useNavigation();
   
   const [markerPosition, setMarkerPosition] = useState('');
-
+	const {userID} = useUserContext();
 
 
   function toggleForm() {
