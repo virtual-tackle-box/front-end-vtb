@@ -13,6 +13,8 @@ import { useUserContext } from '../UserContext/UserContext';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 
+import PropTypes from 'prop-types';
+
 export default function AddCatch({ route }) {
   const navigation = useNavigation();
   const { lat, lon } = route.params;
@@ -96,3 +98,12 @@ export default function AddCatch({ route }) {
     </>
   );
 }
+
+AddCatch.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lon: PropTypes.number.isRequired
+    })
+  })
+};
