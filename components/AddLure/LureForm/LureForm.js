@@ -1,9 +1,10 @@
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import { Text, TextInput, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from "react-native";
 
 import { styles } from "./LureFormStylesheet";
 
 export default function AddFish({ formData, updateForm, sendLureToApi }) {
 	return (
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 		<View style={styles.container}>
 			<Text style={styles.formHeader}>Lure Details</Text>
 
@@ -35,6 +36,9 @@ export default function AddFish({ formData, updateForm, sendLureToApi }) {
 			/>
 
 			<Text style={styles.labels}>Weight</Text>
+
+			
+			
 			<TextInput
 				keyboardType="numeric"
 				label="Weight"
@@ -43,10 +47,12 @@ export default function AddFish({ formData, updateForm, sendLureToApi }) {
 				value={formData.weight}
 				onChangeText={(text) => updateForm("weight", text)}
 			/>
+			
 
 			<TouchableOpacity onPress={()=> sendLureToApi()} style={styles.submitButton}>
 				<Text style={{ fontSize: 24 }}>Submit</Text>
 			</TouchableOpacity>
 		</View>
+		</TouchableWithoutFeedback>
 	);
 }
