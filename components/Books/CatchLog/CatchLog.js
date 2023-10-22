@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 import { deleteCatch, getCatches } from '../../../fetchCalls';
 import { useUserContext } from '../../UserContext/UserContext';
 
+import PropTypes from 'prop-types';
+
 import { CatchLogStylesheet as styles } from './CatchLogStylesheet';
 
 export default function CatchLog() {
@@ -93,3 +95,7 @@ export default function CatchLog() {
     </SafeAreaView>
   );
 }
+
+useUserContext.propTypes = {
+  userID: PropTypes.string.isRequired
+};
