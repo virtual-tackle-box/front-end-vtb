@@ -3,18 +3,21 @@ import { View, Text, TextInput, Button, Image } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import styles from './LoginStyles';
+import { useUserContext } from '../UserContext/UserContext';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  
+  const {setUserID} = useUserContext();
 
   const navigation = useNavigation();
   
   //Does nothing. this will live in Api calls
-  function getUserId(){
+  // function getUserId(){
 
-  }
+  // }
   async function handleLogin() {
     if (!email || !password) {
       setErrorMsg('Invalid login credentials')
@@ -22,21 +25,15 @@ function Login() {
     } else {
       try{
         setErrorMsg('')
-        const data = {
+        const userData = {
           email: email,
           password: password,
         }
-        const getObj = {
-          method: 'GET',
-          headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-        }
-        // const response = await getUserId('url', getObj)
 
-        // const userData = await response.json()
-        // navigation.navigate('Dashboard', {userData: userData});
+        //send request for userID
+        //const userid = await getUserID(userData);
+        
+        setUserID(3);
         navigation.navigate('Dashboard')
     }
     catch (error){

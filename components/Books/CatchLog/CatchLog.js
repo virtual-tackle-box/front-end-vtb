@@ -9,11 +9,14 @@ import { Header } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { deleteCatch, getCatches } from '../../../fetchCalls';
+import { useUserContext } from "../../UserContext/UserContext"
 
 import { CatchLogStylesheet as styles } from './CatchLogStylesheet';
 
 export default function CatchLog() {
   const [catches, setCatches] = useState([]);
+  const {userID} = useUserContext();
+  
 
   const navigation = useNavigation();
 
@@ -22,12 +25,12 @@ export default function CatchLog() {
   }
 
   async function fetchCatches() {
-    const catches = await getCatches();
+    const catches = await getCatches(userID);
     setCatches(catches.data);
   }
 
   async function delCatch(id) {
-    await deleteCatch(undefined, id);
+    await deleteCatch(userID, id);
     fetchCatches();
   }
 

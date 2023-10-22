@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import {UserContextProvider} from './components/UserContext/UserContext';
 
 import Login from './components/Login/Login';
 import Dashboard from './components/Dashboard/Dashboard.js';
@@ -17,6 +18,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    <UserContextProvider>
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen
@@ -81,5 +83,6 @@ export default function App() {
         /> */}
       </Stack.Navigator>
     </NavigationContainer>
+    </UserContextProvider>
   );
 }

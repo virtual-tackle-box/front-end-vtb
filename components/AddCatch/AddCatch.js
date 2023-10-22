@@ -9,6 +9,7 @@ import AddLure from './LureForm/LureForm';
 import AddSpot from './AddSpot/AddSpot';
 
 import { postNewCatch } from '../../fetchCalls';
+import { useUserContext } from '../UserContext/UserContext';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 
@@ -27,6 +28,8 @@ export default function AddCatch({ route }) {
   });
   const [error, setError] = useState('');
 
+  const {userID} = useUserContext();
+
   function updateForm(name, value) {
     setFormData(prev => {
       return {
@@ -42,7 +45,7 @@ export default function AddCatch({ route }) {
       return;
     }
 
-    postNewCatch(undefined, formData)
+    postNewCatch(userID, formData)
   }
 
   function navToDash() {
