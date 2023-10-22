@@ -89,13 +89,45 @@ export async function deleteLure(userID = 1, lureID) {
     const response = await fetch(url, { method: 'DELETE' });
 
     if (response.ok) {
-      console.log('response status: ', response.status);
       console.log('Resource deleted successfully.');
     } else {
       console.error('Failed to delete resource.');
     }
   } catch (error) {
     console.error('An error occurred:', error);
+    return error;
+  }
+}
+
+export async function postImageToCloudinary(url) {
+  console.log(url);
+  const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dw48ifzg4/upload';
+
+  const base64Img = `data:image/jpg;base64,${url}`;
+  console.log(base64Img);
+
+  const data = {
+    file: base64Img,
+    upload_preset: 'ml_default'
+  };
+
+  try {
+    const response = await fetch(cloudinaryURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      console.log('cloudinary response not ok: ', response);
+    } else if (response.ok) {
+      console.log('successfully posted to cloudinary: ', response);
+      return response.json();
+    }
+  } catch (error) {
+    console.error(error);
     return error;
   }
 }
