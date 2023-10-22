@@ -126,11 +126,9 @@ export async function postNewLure(userID = 1, formData) {
 }
 
 export async function postImageToCloudinary(url) {
-  console.log(url);
   const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dw48ifzg4/upload';
 
   const base64Img = `data:image/jpg;base64,${url}`;
-  console.log(base64Img);
 
   const data = {
     file: base64Img,

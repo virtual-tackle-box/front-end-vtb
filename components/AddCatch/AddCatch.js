@@ -25,7 +25,7 @@ export default function AddCatch({ route }) {
     length: 0.0,
     lure: '',
     local_url: '',
-    cloudinary_urls: [] // push to array
+    cloudinary_urls: []
   });
   const [error, setError] = useState('');
 

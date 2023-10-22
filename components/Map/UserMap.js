@@ -43,9 +43,7 @@ export default function UserMap({ setMarkerPosition }) {
 			markerRef.current.showCallout();
 		}
 	}
-	console.log("CATCHES", catches)
 
-	// This will be implemented once we have API calls
 	useEffect(() => {
 		async function gatherCatchData(){
 			const catchData = await getCatches(userID);
