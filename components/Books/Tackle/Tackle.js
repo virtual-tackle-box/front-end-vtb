@@ -9,26 +9,38 @@ import { Header } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { getLures } from '../../../fetchCalls';
+import { useUserContext } from "../../UserContext/UserContext"
+import { deleteLure } from '../../../fetchCalls';
 
 import { TackleStylesheet as styles } from './TackleStylesheet';
 
 export default function CatchLog() {
   const [lures, setLures] = useState([]);
-
+  const {userID} = useUserContext();
   const navigation = useNavigation();
 
-  useEffect(() => {
-    async function fetchLures() {
-      const lures = await getLures();
+  
+  async function fetchLures() {
+      const lures = await getLures(userID);
       setLures(lures.data);
     }
 
-    fetchLures();
-  }, []);
+  
+  
 
   function navToBooks() {
     navigation.navigate('book');
   }
+
+  async function removeLure(id){
+    const deletedLure = await deleteLure(userID,id);
+    fetchLures();
+  }
+
+  useEffect(() => {
+    fetchLures();
+  })
+
 
   const lureCards = lures.map(lure => {
     const { id } = lure;
@@ -36,6 +48,8 @@ export default function CatchLog() {
 
     return (
       <View style={styles.lureCard} key={id} testID={`${id}`}>
+        <TouchableOpacity onPress={() => removeLure(id) }>
+          <Text>X</Text></TouchableOpacity>
         <View>
           <Text>Brand: {brand}</Text>
           <Text>Type: {variety}</Text>
