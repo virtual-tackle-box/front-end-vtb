@@ -45,8 +45,8 @@ export async function getCatches(userID = 1) {
   }
 }
 
-export async function deleteCatch(userID = 1, lureID) {
-  const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/${userID}/catches/${lureID}`;
+export async function deleteCatch(userID = 1, catchID) {
+  const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/${userID}/catches/${catchID}`;
 
   try {
     const response = await fetch(url, { method: 'DELETE' });
@@ -81,7 +81,7 @@ export async function getLures(userID = 1) {
 }
 
 export async function deleteLure(userID = 1, lureID) {
-  const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/${lureID}`;
+  const url = `https://guarded-anchorage-05999-6f151b14a819.herokuapp.com/api/v1/users/${userID}/lures/${lureID}`;
 
   try {
     const response = await fetch(url, { method: 'DELETE' });
@@ -89,6 +89,7 @@ export async function deleteLure(userID = 1, lureID) {
     if (response.ok) {
       console.log('Resource deleted successfully.');
     } else {
+      console.log('failed response: ', response);
       console.error('Failed to delete resource.');
     }
   } catch (error) {
