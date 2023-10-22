@@ -29,7 +29,7 @@ export default function AddCatch({ route }) {
   });
   const [error, setError] = useState('');
 
-  const {userID} = useUserContext();
+  const { userID } = useUserContext();
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -76,7 +76,14 @@ export default function AddCatch({ route }) {
           * indicates a required form field
         </Text>
         <AddSpot updateForm={updateForm} spot={formData.spot} />
-        <AddFish formData={formData} updateForm={updateForm} />
+        <AddFish
+          formData={{
+            species: formData.species,
+            weight: formData.weight,
+            length: formData.length
+          }}
+          updateForm={updateForm}
+        />
         <AddLure updateForm={updateForm} lure={formData.lure} />
         <CameraScreen updateForm={updateForm} />
         {error && <Text style={{ marginLeft: 45 }}>{error}</Text>}
