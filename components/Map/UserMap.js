@@ -15,6 +15,8 @@ import UsaMap from "./usaMap.jpeg";
 import { getCatches } from "../../fetchCalls";
 import { useUserContext } from "../UserContext/UserContext";
 
+import PropTypes from 'prop-types';
+
 export default function UserMap({ setMarkerPosition }) {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
@@ -223,3 +225,15 @@ export default function UserMap({ setMarkerPosition }) {
 
 	return mapView;
 }
+
+UserMap.propTypes = {
+  setMarkerPosition: PropTypes.func.isRequired,
+}
+
+useUserContext.propTypes = {
+  userID: PropTypes.number.isRequired,
+  catches: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setCatches: PropTypes.func.isRequired,
+  showMarker: PropTypes.bool.isRequired
+}
+// const { userID, catches, setCatches, showMarker } = useUserContext();
