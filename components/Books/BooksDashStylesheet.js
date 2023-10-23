@@ -6,13 +6,14 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'white'
     },
 
     dataContainer: {
         height: '30%',
         width: '80%',
-        backgroundColor: 'green',
-        justifyContent: 'center',
+        // backgroundColor: 'green',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         margin: 10,
     }

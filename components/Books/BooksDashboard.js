@@ -4,10 +4,12 @@ import {
   Text,
   Animated,
   Touchable,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import { styles } from './BooksDashStylesheet';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import tackleIcon from './tackle-boxicon.png'
 
 export default function BooksDashboard() {
   const navigation = useNavigation();
@@ -47,16 +49,21 @@ export default function BooksDashboard() {
 
   return (
     <Animated.View style={[styles.container, slideInStyle]}>
-      <TouchableOpacity style={styles.dataContainer} onPress={navToTackle}>
-        <View style={styles.dataContainer}>
-          <Text>Lures</Text>
-        </View>
-      </TouchableOpacity>
+      <ImageBackground source={tackleIcon} style={{ flex: 0.4, justifyContent: "center", alignItems: "center", width: '90%', height: '90%'}} resizeMode='contain'>
+        <TouchableOpacity style={styles.dataContainer} onPress={navToTackle}>
+          <View style={styles.dataContainer}>
+            <Text>Lures</Text>
+          </View>
+        </TouchableOpacity>
+      </ImageBackground>
+      <ImageBackground source={tackleIcon} style={{ flex: 0.4, justifyContent: "center", alignItems: "center", width: '90%', height: '90%'}} resizeMode='contain'>
       <TouchableOpacity style={styles.dataContainer} onPress={navToCatchLog}>
         <View style={styles.dataContainer}>
           <Text>Catch Log</Text>
         </View>
       </TouchableOpacity>
+      </ImageBackground>
     </Animated.View>
   );
-}
+  
+  }

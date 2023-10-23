@@ -10,10 +10,11 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./CustomTabBarStylessheet";
 import AddButton from "../AddButton/AddButton";
-
+import { useUserContext } from "../UserContext/UserContext";
 function TabBar({ state, descriptors, navigation, toggleForm }) {
 
 	const [tabPressed, setTabPressed] = useState(false);
+	const {setShowMarker} = useUserContext();
 
 	return (
 		<View testID="dashboard-container" style={styles.mainContainer}>
@@ -36,7 +37,7 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 					});
 
 					if (!isFocused && !event.defaultPrevented) {
-						console.log("Navigation")
+						setShowMarker(false)
 						setTabPressed(true);
 						navigation.navigate(route.name);
 					}

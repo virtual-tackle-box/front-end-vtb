@@ -74,7 +74,7 @@ export default function UserMap({ setMarkerPosition }) {
 		if (markerRef.current) {
 			setTimeout(() => {
 				displayCallout();
-			}, 1000);
+			}, 500);
 		}
 	}, [location, showMarker]);
 
