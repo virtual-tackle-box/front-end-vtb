@@ -51,6 +51,7 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
 						<Pressable
 							onPress={handlePress}
 							style={{
+								...styles.tabButton,
 								backgroundColor: isFocused ? "black" : "#25292e",
 								borderRadius: 20,
 							}}

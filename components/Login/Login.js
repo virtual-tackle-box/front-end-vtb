@@ -23,7 +23,7 @@ function Login() {
       setUserID(1)
       navigation.navigate('Dashboard')
     }
-    if (!email || !password) {
+    else if (!email || !password) {
       setErrorMsg('Invalid login credentials')
       return;
     } else {
@@ -89,7 +89,7 @@ function Login() {
         <View>
         <Text style={styles.text}></Text>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={styles.guestButtonContainer}>
           <Button
             testID='login-button'
             color='white'
@@ -98,8 +98,8 @@ function Login() {
           />
         </View>
         </View>
-        <View>
-          <Text>Dont have an account?</Text>
+        <View style={styles.signUpText}>
+          <Text style={styles.signUpText}>Dont have an account?</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button

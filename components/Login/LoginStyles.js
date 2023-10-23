@@ -39,6 +39,21 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		width: 150,
 		marginTop: 10,
+		shadowColor: "rgba(0, 0, 0, 0.8)",
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 1,
+		shadowRadius: 4,
+	},
+
+	guestButtonContainer: {
+		backgroundColor: "teal",
+		borderRadius: 5,
+		width: 150,
+		marginTop: 10,
+		shadowColor: "rgba(0, 0, 0, 0.8)",
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 1,
+		shadowRadius: 4,
 	},
 
 	loginText: {
@@ -65,6 +80,10 @@ const styles = StyleSheet.create({
 	text: {
 		color: "white",
 	},
+
+  signUpText:{
+    color:'blue'
+  },
 
 	errorText: {
 		color: "red",
