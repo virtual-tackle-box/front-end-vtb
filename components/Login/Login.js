@@ -91,7 +91,7 @@ function Login() {
         </View>
         <View style={styles.guestButtonContainer}>
           <Button
-            testID='login-button'
+            testID='guest-login-button'
             color='white'
             title='Login as guest'
             onPress={() => handleLogin('guest')}
