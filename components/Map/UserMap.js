@@ -52,6 +52,7 @@ export default function UserMap({ setMarkerPosition }) {
 	}, []);
 
 	useEffect(() => {
+		console.log("Creating new markers")
 		const newCatchMarkers = catches && catches.map((catchData) => {
 			return {
 				id: catchData.id,

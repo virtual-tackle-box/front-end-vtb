@@ -15,8 +15,7 @@ import { useUserContext } from '../../UserContext/UserContext';
 import { CatchLogStylesheet as styles } from './CatchLogStylesheet';
 
 export default function CatchLog() {
-  const [catches, setCatches] = useState([]);
-  const { userID } = useUserContext();
+  const { userID, catches, setCatches } = useUserContext();
 
   const navigation = useNavigation();
 
