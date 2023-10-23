@@ -29,7 +29,7 @@ export default function AddCatch({ route }) {
   });
   const [error, setError] = useState('');
 
-  const {userID} = useUserContext();
+  const {userID, setShowMarker} = useUserContext();
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -51,6 +51,7 @@ export default function AddCatch({ route }) {
       setFormData(formData.cloudinary_urls.push(cloudURL.url));
     }
     await postNewCatch(userID, formData);
+    setShowMarker(false);
     navigation.navigate('CatchLog')
   }
 

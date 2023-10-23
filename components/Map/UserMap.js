@@ -20,7 +20,7 @@ export default function UserMap({ setMarkerPosition }) {
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [slideInAnim] = useState(new Animated.Value(0));
 	const [catchMarkers, setCatchMarkers] = useState([]);
-	const {userID, catches, setCatches} = useUserContext();
+	const { userID, catches, setCatches, showMarker } = useUserContext();
 
 	let mapRef = useRef(null);
 	let markerRef = useRef(null);
@@ -44,27 +44,29 @@ export default function UserMap({ setMarkerPosition }) {
 	}
 
 	useEffect(() => {
-		async function gatherCatchData(){
+		async function gatherCatchData() {
 			const catchData = await getCatches(userID);
-			setCatches(catchData.data)
+			setCatches(catchData.data);
 		}
 		gatherCatchData();
 	}, []);
 
 	useEffect(() => {
-		console.log("Creating new markers")
-		const newCatchMarkers = catches && catches.map((catchData) => {
-			return {
-				id: catchData.id,
-				coordinates: {
-					latitude: catchData.attributes.latitude,
-					longitude: catchData.attributes.longitude,
-				},
-				species: catchData.attributes.species,
-				weight: catchData.attributes.weight,
-				length: catchData.attributes.length
-			};
-		});
+		console.log("Creating new markers");
+		const newCatchMarkers =
+			catches &&
+			catches.map((catchData) => {
+				return {
+					id: catchData.id,
+					coordinates: {
+						latitude: catchData.attributes.latitude,
+						longitude: catchData.attributes.longitude,
+					},
+					species: catchData.attributes.species,
+					weight: catchData.attributes.weight,
+					length: catchData.attributes.length,
+				};
+			});
 		setCatchMarkers(newCatchMarkers);
 	}, [catches]);
 
@@ -74,7 +76,7 @@ export default function UserMap({ setMarkerPosition }) {
 				displayCallout();
 			}, 1000);
 		}
-	}, [location]);
+	}, [location, showMarker]);
 
 	useEffect(() => {
 		if (mapRef.current && location !== "denied") {
@@ -148,18 +150,38 @@ export default function UserMap({ setMarkerPosition }) {
 		],
 	};
 
-
-	const catchMarkerComponents = catchMarkers && catchMarkers.map((marker) => {
-		return (<Marker
-			key={marker.id}
-			coordinate={marker.coordinates}
+	const userMarker = location && (
+		<Marker
+			ref={markerRef}
+			coordinate={{
+				latitude: location.coords.latitude,
+				longitude: location.coords.longitude,
+			}}
+			draggable
+			onDragEnd={(e) => {
+				setMarkerPosition(e.nativeEvent.coordinate);
+			}}
 		>
 			<Callout>
-				<Text>{marker.species}</Text>
-				<Text>{marker.length}in     {marker.weight}lbs</Text>
+				<Text>Drag to place</Text>
 			</Callout>
 		</Marker>
-	)});
+	);
+
+	const catchMarkerComponents =
+		catchMarkers &&
+		catchMarkers.map((marker) => {
+			return (
+				<Marker key={marker.id} coordinate={marker.coordinates}>
+					<Callout>
+						<Text>{marker.species}</Text>
+						<Text>
+							{marker.length}in {marker.weight}lbs
+						</Text>
+					</Callout>
+				</Marker>
+			);
+		});
 
 	const mapView =
 		onWeb === true ? (
@@ -193,21 +215,7 @@ export default function UserMap({ setMarkerPosition }) {
 					}}
 					mapType="satellite"
 				>
-					<Marker
-						ref={markerRef}
-						coordinate={{
-							latitude: location.coords.latitude,
-							longitude: location.coords.longitude,
-						}}
-						draggable
-						onDragEnd={(e) => {
-							setMarkerPosition(e.nativeEvent.coordinate);
-						}}
-					>
-						<Callout>
-							<Text>Drag to place</Text>
-						</Callout>
-					</Marker>
+					{showMarker && userMarker}
 					{catchMarkerComponents}
 				</MapView>
 			</Animated.View>
