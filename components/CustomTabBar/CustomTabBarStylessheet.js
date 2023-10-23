@@ -16,14 +16,13 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		// marginVertical: 10,
 		borderRadius: 1,
         backgroundColor: "#25292e",
 	},
 
 	actionButton: {
-		top: -25,
-		width: 60,
+		top: -20,
+		width: 60,  
 		height: 60,
 		backgroundColor: 'black',
 		justifyContent: "center",
@@ -32,6 +31,10 @@ export const styles = StyleSheet.create({
 		borderColor: 'white',
 		borderWidth: 2,
 
+	},
+
+	tabButton: {
+		marginBottom: 7.5,
 	}
 });
 
