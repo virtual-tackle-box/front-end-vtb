@@ -11,6 +11,7 @@ import { styles } from "./AddLureStylesheet";
 import LureForm from "./LureForm/LureForm";
 import LureImage from "./lureiconNobackground.png";
 import { postNewLure } from "../../fetchCalls";
+import { useUserContext } from "../UserContext/UserContext";
 
 export default function AddLure() {
 	const [errorMsg, setErrorMsg] = useState("");
@@ -21,9 +22,7 @@ export default function AddLure() {
 		color: "",
 		weight: "",
 	});
-
-
-    
+	const {setShowMarker} = useUserContext();
 
 	function updateForm(name, value) {
 		setFormData((prev) => {
@@ -46,20 +45,19 @@ export default function AddLure() {
 			!formData.weight
 		) {
 			setErrorMsg("Please fill out all fields.");
-            return;
+			return;
 		}
-        setErrorMsg('')
-		
-		
-		try {
-			const response = await postNewLure('userID', formData);
+		setErrorMsg("");
 
+		try {
+			setShowMarker(false);
+			const response = await postNewLure("userID", formData);
 			
-            setErrorMsg("")
-            navigation.navigate('book')
-		} catch (error){
-            setErrorMsg(error.message);
-        }
+			setErrorMsg("");
+			navigation.navigate("book");
+		} catch (error) {
+			setErrorMsg(error.message);
+		}
 	}
 
 	return (
@@ -73,7 +71,11 @@ export default function AddLure() {
 					<Text>Cancel</Text>
 				</TouchableOpacity>
 				<View style={styles.lureForm}>
-					<LureForm formData={formData} updateForm={updateForm} sendLureToApi={sendLureToApi} />
+					<LureForm
+						formData={formData}
+						updateForm={updateForm}
+						sendLureToApi={sendLureToApi}
+					/>
 				</View>
 				{errorMsg && (
 					<View style={styles.errorContainer}>
