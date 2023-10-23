@@ -18,8 +18,12 @@ function Login() {
   // function getUserId(){
 
   // }
-  async function handleLogin() {
-    if (!email || !password) {
+  async function handleLogin(option) {
+    if(option === 'guest'){
+      setUserID(1)
+      navigation.navigate('Dashboard')
+    }
+    else if (!email || !password) {
       setErrorMsg('Invalid login credentials')
       return;
     } else {
@@ -73,6 +77,7 @@ function Login() {
           onChangeText={setPassword}
           secureTextEntry={true}
         />
+        <View style={styles.loginButtonsContainer}>
         <View style={styles.buttonContainer}>
           <Button
             testID='login-button'
@@ -80,6 +85,21 @@ function Login() {
             title='Login'
             onPress={() => handleLogin()}
           />
+        </View>
+        <View>
+        <Text style={styles.text}></Text>
+        </View>
+        <View style={styles.guestButtonContainer}>
+          <Button
+            testID='guest-login-button'
+            color='white'
+            title='Login as guest'
+            onPress={() => handleLogin('guest')}
+          />
+        </View>
+        </View>
+        <View style={styles.signUpText}>
+          <Text style={styles.signUpText}>Dont have an account?</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button

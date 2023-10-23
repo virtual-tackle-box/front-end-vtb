@@ -13,11 +13,10 @@ import { styles } from './CustomTabBarStylessheet';
 import AddButton from '../AddButton/AddButton';
 
 import PropTypes from 'prop-types';
-import { useUserContext } from "../UserContext/UserContext";
+import { useUserContext } from '../UserContext/UserContext';
 function TabBar({ state, descriptors, navigation, toggleForm }) {
-
-	const [tabPressed, setTabPressed] = useState(false);
-	const {setShowMarker} = useUserContext();
+  const [tabPressed, setTabPressed] = useState(false);
+  const { setShowMarker } = useUserContext();
 
   return (
     <View testID='dashboard-container' style={styles.mainContainer}>
@@ -43,12 +42,12 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
             target: route.key
           });
 
-					if (!isFocused && !event.defaultPrevented) {
-						setShowMarker(false)
-						setTabPressed(true);
-						navigation.navigate(route.name);
-					}
-				};
+          if (!isFocused && !event.defaultPrevented) {
+            setShowMarker(false);
+            setTabPressed(true);
+            navigation.navigate(route.name);
+          }
+        };
 
         return (
           <View
@@ -59,6 +58,7 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
             <Pressable
               onPress={handlePress}
               style={{
+                ...styles.tabButton,
                 backgroundColor: isFocused ? 'black' : '#25292e',
                 borderRadius: 20
               }}
