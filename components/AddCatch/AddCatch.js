@@ -31,7 +31,7 @@ export default function AddCatch({ route }) {
   });
   const [error, setError] = useState('');
 
-  const {userID, setShowMarker} = useUserContext();
+  const { userID, setShowMarker } = useUserContext();
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -54,7 +54,7 @@ export default function AddCatch({ route }) {
     }
     await postNewCatch(userID, formData);
     setShowMarker(false);
-    navigation.navigate('CatchLog')
+    navigation.navigate('CatchLog');
   }
 
   function navToDash() {
@@ -108,4 +108,9 @@ AddCatch.propTypes = {
       lon: PropTypes.number.isRequired
     })
   })
+};
+
+useUserContext.propTypes = {
+  userID: PropTypes.number.isRequired,
+  setShowMarker: PropTypes.func.isRequired
 };
