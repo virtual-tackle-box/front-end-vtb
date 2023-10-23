@@ -1,10 +1,18 @@
-import { View, TouchableOpacity, StyleSheet, Animated, Text, ImageBackground, Easing} from "react-native";
+import {
+	View,
+	TouchableOpacity,
+	StyleSheet,
+	Animated,
+	Text,
+	ImageBackground,
+	Easing,
+} from "react-native";
 import { styles } from "./AddButtonStylesheet";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
-import fishIcon from './fishIconNoBack.png'
-
+import fishIcon from "./fishIconNoBack.png";
+import { useUserContext } from "../UserContext/UserContext";
 
 export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 	const navigation = useNavigation();
@@ -14,6 +22,7 @@ export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 	const [opacity] = useState(new Animated.Value(0));
 
 	const [isMenuOpen, setMenuOpen] = useState(false);
+	const { showMarker, setShowMarker } = useUserContext();
 
 	function navigateToLure() {
 		navigation.navigate("AddLure");
@@ -33,11 +42,11 @@ export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 		}).start();
 
 		Animated.timing(opacity, {
-      toValue: 1, 
-      duration: 500,
-      easing: Easing.linear,
-      useNativeDriver: false, 
-    }).start();
+			toValue: 1,
+			duration: 500,
+			easing: Easing.linear,
+			useNativeDriver: false,
+		}).start();
 	};
 
 	const closeMenu = () => {
@@ -52,48 +61,62 @@ export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 			duration: 800,
 			useNativeDriver: false,
 		}).start();
-		
+
 		Animated.timing(opacity, {
-      toValue: 0, 
-      duration: 400,
-      easing: Easing.linear, 
-      useNativeDriver: false, 
-    }).start();
+			toValue: 0,
+			duration: 400,
+			easing: Easing.linear,
+			useNativeDriver: false,
+		}).start();
 	};
 
 	useEffect(() => {
-		if(tabPressed){
+		if (tabPressed) {
 			closeMenu();
 			setTabPressed(false);
 		}
-	},[tabPressed])
+	}, [tabPressed]);
 
 	return (
 		<View style={styles.mainContainer}>
-			<Animated.View style={[styles.addButtons, { bottom: addFish , opacity: opacity}]}>
-				<ImageBackground source={fishIcon} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-				<TouchableOpacity
-					onPress={() => {
-						closeMenu();
-						toggleForm();
-					}}
+			<Animated.View
+				style={[styles.addButtons, { bottom: addFish, opacity: opacity }]}
+			>
+				<ImageBackground
+					source={fishIcon}
+					style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
 				>
-					<Text testID="fish-fins-icon" style={styles.buttonText}>Add Catch</Text>
-					{/* <Icon testID="fish-fins-icon" name="book" size={35} color="white" /> */}
-				</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => {
+							closeMenu();
+							toggleForm();
+						}}
+					>
+						<Text testID="fish-fins-icon" style={styles.buttonText}>
+							Add Catch
+						</Text>
+						{/* <Icon testID="fish-fins-icon" name="book" size={35} color="white" /> */}
+					</TouchableOpacity>
 				</ImageBackground>
 			</Animated.View>
-			<Animated.View style={[styles.addButtons, { bottom: addLure , opacity: opacity }]}>
-			<ImageBackground source={fishIcon} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-				<TouchableOpacity
-					onPress={() => {
-						closeMenu();
-						navigateToLure();
-					}}
+			<Animated.View
+				style={[styles.addButtons, { bottom: addLure, opacity: opacity }]}
+			>
+				<ImageBackground
+					source={fishIcon}
+					style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
 				>
-					<Text testID="lure-icon" style={styles.buttonText} >Add Lure</Text>
-					{/* <Icon testID="lure-icon" name="superpowers" size={35} color="white" /> */}
-				</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => {
+							closeMenu();
+							navigateToLure();
+						}}
+					>
+						<Text testID="lure-icon" style={styles.buttonText}>
+							Add Lure
+						</Text>
+						{/* <Icon testID="lure-icon" name="superpowers" size={35} color="white" /> */}
+					</TouchableOpacity>
 				</ImageBackground>
 			</Animated.View>
 
@@ -101,7 +124,15 @@ export default function AddButton({ toggleForm, tabPressed, setTabPressed }) {
 				testID="add-button"
 				style={styles.circleButton}
 				onPress={() => {
-					isMenuOpen === false ? openMenu() : closeMenu();
+					isMenuOpen === false
+						? (() => {
+								setShowMarker(true);
+								openMenu();
+						  })()
+						: (() => {
+								closeMenu();
+								setShowMarker(false);
+						  })();
 				}}
 			>
 				<Icon
