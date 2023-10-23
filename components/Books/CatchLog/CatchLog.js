@@ -96,5 +96,7 @@ export default function CatchLog() {
 }
 
 useUserContext.propTypes = {
-  userID: PropTypes.string.isRequired
+  userID: PropTypes.string.isRequired,
+  catches: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setCatches: PropTypes.func.isRequired
 };
