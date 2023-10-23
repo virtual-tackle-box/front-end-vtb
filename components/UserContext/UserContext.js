@@ -4,10 +4,13 @@ const UserContext = createContext();
 
 export function UserContextProvider({ children }) {
 	const [userID, setUserID] = useState("");
+	const [catches, setCatches] = useState('')
 
 	const value = {
 		userID,
 		setUserID,
+		catches,
+		setCatches,
 	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

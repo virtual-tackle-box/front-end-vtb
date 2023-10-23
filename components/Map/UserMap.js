@@ -20,8 +20,7 @@ export default function UserMap({ setMarkerPosition }) {
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [slideInAnim] = useState(new Animated.Value(0));
 	const [catchMarkers, setCatchMarkers] = useState([]);
-	const [catches, setCatches] = useState([]);
-	const {userID} = useUserContext();
+	const {userID, catches, setCatches} = useUserContext();
 
 	let mapRef = useRef(null);
 	let markerRef = useRef(null);
@@ -53,7 +52,7 @@ export default function UserMap({ setMarkerPosition }) {
 	}, []);
 
 	useEffect(() => {
-		const newCatchMarkers = catches.map((catchData) => {
+		const newCatchMarkers = catches && catches.map((catchData) => {
 			return {
 				id: catchData.id,
 				coordinates: {
@@ -149,7 +148,7 @@ export default function UserMap({ setMarkerPosition }) {
 	};
 
 
-	const catchMarkerComponents = catchMarkers.map((marker) => {
+	const catchMarkerComponents = catchMarkers && catchMarkers.map((marker) => {
 		return (<Marker
 			key={marker.id}
 			coordinate={marker.coordinates}

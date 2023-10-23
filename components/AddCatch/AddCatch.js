@@ -50,7 +50,8 @@ export default function AddCatch({ route }) {
       const cloudURL = await postImageToCloudinary(formData.local_url);
       setFormData(formData.cloudinary_urls.push(cloudURL.url));
     }
-    postNewCatch(userID, formData);
+    await postNewCatch(userID, formData);
+    navigation.navigate('CatchLog')
   }
 
   function navToDash() {

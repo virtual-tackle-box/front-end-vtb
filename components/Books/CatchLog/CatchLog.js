@@ -60,7 +60,7 @@ export default function CatchLog() {
         >
           <Text style={styles.delBtn}>X</Text>
         </TouchableOpacity>
-        {cloudinary_urls?.length && image}
+        {/* {cloudinary_urls?.length && image} */}
         <View>
           <Text>Species: {species}</Text>
           <Text>Weight: {weight}</Text>
