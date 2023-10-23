@@ -1,44 +1,47 @@
 import { StyleSheet } from "react-native";
 
-
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#5A5A5A'
-        
+	backgroundContainer: {
+		flex: 1,
+	},
+
+	backgroundImage: {
+		flex: 1,
     },
 
-    dataContainer: {
-        
-        height: '20%',
-        width: '80%',
-        backgroundColor: 'black',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        margin: 10,
-        borderWidth: 2,
-    },
+	container: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
 
-    imageContainer:{
-        width: 100,
-        height: 100,
-    },
+	dataContainer: {
+		height: "20%",
+		width: "80%",
+		backgroundColor: 'rgba(0,0,0,.7)',
+		flexDirection: "row",
+		justifyContent: "space-around",
+		alignItems: "center",
+		margin: 10,
+		borderWidth: 2,
+	},
 
-    images:{
-        width: 100,
-        height: 100,
-    },
+	imageContainer: {
+		width: 100,
+		height: 100,
+	},
 
-    textContainer:{
-        width: '40%'
-    },
+	images: {
+		width: 100,
+		height: 100,
+	},
 
-    text:{
-        fontSize: 35,
-        color: 'silver',
-    }
+	textContainer: {
+		width: "40%",
+	},
 
-})
+	text: {
+		fontSize: 35,
+		color: "silver",
+	},
+});
