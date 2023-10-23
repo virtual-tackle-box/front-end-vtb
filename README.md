@@ -1,4 +1,15 @@
+<div align="center">
+   <a href="https://brew-buddy.vercel.app">
+      <img src="assets/tackleboxlogo.png" alt="VTB Logo" width="500" height="100">
+   </a>
+</div>
+
 # Virtual Tackle Box (VTB) - Mobile Tackle and Catch Tracking App (iOS)
+
+## Introduction
+<div align="center">
+   <span>Virtual Tackle Box (VTB) is a React Native iOS application designed for fishermen to store, manage, and view past catches, view those catches on an interactive map, and organize their lures in a virtual tackle box. Users can upload images from their mobile device both from the camera and from their photo gallery. Additionally, users can sign up for their own VTB account and opt in to receive SMS correspondence from VTB.</span>
+</div>
 
 ## Installation
 These instructions will help you set up and run the VTB app on your iOS device or simulator.
