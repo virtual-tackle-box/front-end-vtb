@@ -13,6 +13,8 @@ import LureImage from "./lureiconNobackground.png";
 import { postNewLure } from "../../fetchCalls";
 import { useUserContext } from "../UserContext/UserContext";
 
+import PropTypes from 'prop-types';
+
 export default function AddLure() {
 	const [errorMsg, setErrorMsg] = useState("");
 	const navigation = useNavigation();
@@ -85,4 +87,8 @@ export default function AddLure() {
 			</View>
 		</ImageBackground>
 	);
+}
+
+useUserContext.propTypes = {
+  setShowMarker: PropTypes.func.isRequired
 }
