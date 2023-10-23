@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { uploadPhotoStylesheet as styles } from './UploadPhotoStylesheet';
 
+import PropTypes from 'prop-types';
+
 export default function CameraScreen({ updateForm }) {
   const [cameraPermission, setCameraPermission] = useState(false);
   const [galleryPermission, setGalleryPermission] = useState(false);
@@ -122,3 +124,7 @@ export default function CameraScreen({ updateForm }) {
     </View>
   );
 }
+
+CameraScreen.propTypes = {
+  updateForm: PropTypes.func.isRequired
+};

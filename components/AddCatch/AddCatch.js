@@ -13,6 +13,8 @@ import { useUserContext } from '../UserContext/UserContext';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 
+import PropTypes from 'prop-types';
+
 export default function AddCatch({ route }) {
   const navigation = useNavigation();
   const { lat, lon } = route.params;
@@ -29,7 +31,7 @@ export default function AddCatch({ route }) {
   });
   const [error, setError] = useState('');
 
-  const {userID, setShowMarker} = useUserContext();
+  const { userID, setShowMarker } = useUserContext();
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -52,7 +54,7 @@ export default function AddCatch({ route }) {
     }
     await postNewCatch(userID, formData);
     setShowMarker(false);
-    navigation.navigate('CatchLog')
+    navigation.navigate('CatchLog');
   }
 
   function navToDash() {
@@ -77,8 +79,15 @@ export default function AddCatch({ route }) {
         <Text style={{ marginLeft: 10 }}>
           * indicates a required form field
         </Text>
-        <AddSpot updateForm={updateForm} spot={formData.spot} />
-        <AddFish formData={formData} updateForm={updateForm} />
+        <AddSpot updateForm={updateForm} spot={formData.spot_name} />
+        <AddFish
+          formData={{
+            species: formData.species,
+            weight: formData.weight,
+            length: formData.length
+          }}
+          updateForm={updateForm}
+        />
         <AddLure updateForm={updateForm} lure={formData.lure} />
         <CameraScreen updateForm={updateForm} />
         {error && <Text style={{ marginLeft: 45 }}>{error}</Text>}
@@ -91,3 +100,17 @@ export default function AddCatch({ route }) {
     </>
   );
 }
+
+AddCatch.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lon: PropTypes.number.isRequired
+    })
+  })
+};
+
+useUserContext.propTypes = {
+  userID: PropTypes.number.isRequired,
+  setShowMarker: PropTypes.func.isRequired
+};

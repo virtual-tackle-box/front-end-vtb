@@ -2,6 +2,8 @@ import { Text, TextInput, View } from 'react-native';
 
 import { AddFishStylesheet as styles } from './AddFishStylesheet';
 
+import PropTypes from 'prop-types';
+
 export default function AddFish({ formData, updateForm }) {
   return (
     <View style={styles.container}>
@@ -28,7 +30,7 @@ export default function AddFish({ formData, updateForm }) {
         label='Weight'
         placeholder='lb'
         style={styles.input}
-        value={formData.weight}
+        value={formData.weight.toString()}
         onChangeText={text => updateForm('weight', text)}
       />
 
@@ -40,9 +42,18 @@ export default function AddFish({ formData, updateForm }) {
         label='Length'
         placeholder='in'
         style={styles.input}
-        value={formData.length}
+        value={formData.length.toString()}
         onChangeText={text => updateForm('length', text)}
       />
     </View>
   );
 }
+
+AddFish.propTypes = {
+  formData: PropTypes.shape({
+    species: PropTypes.string.isRequired,
+    weight: PropTypes.number,
+    length: PropTypes.number
+  }).isRequired,
+  updateForm: PropTypes.func.isRequired
+};
