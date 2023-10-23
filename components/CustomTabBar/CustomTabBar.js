@@ -13,9 +13,11 @@ import { styles } from './CustomTabBarStylessheet';
 import AddButton from '../AddButton/AddButton';
 
 import PropTypes from 'prop-types';
-
+import { useUserContext } from "../UserContext/UserContext";
 function TabBar({ state, descriptors, navigation, toggleForm }) {
-  const [tabPressed, setTabPressed] = useState(false);
+
+	const [tabPressed, setTabPressed] = useState(false);
+	const {setShowMarker} = useUserContext();
 
   return (
     <View testID='dashboard-container' style={styles.mainContainer}>
@@ -41,12 +43,12 @@ function TabBar({ state, descriptors, navigation, toggleForm }) {
             target: route.key
           });
 
-          if (!isFocused && !event.defaultPrevented) {
-            console.log('Navigation');
-            setTabPressed(true);
-            navigation.navigate(route.name);
-          }
-        };
+					if (!isFocused && !event.defaultPrevented) {
+						setShowMarker(false)
+						setTabPressed(true);
+						navigation.navigate(route.name);
+					}
+				};
 
         return (
           <View

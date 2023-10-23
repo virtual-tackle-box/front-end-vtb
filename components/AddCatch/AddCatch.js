@@ -31,7 +31,7 @@ export default function AddCatch({ route }) {
   });
   const [error, setError] = useState('');
 
-  const { userID } = useUserContext();
+  const {userID, setShowMarker} = useUserContext();
 
   function updateForm(name, value) {
     setFormData(prev => {
@@ -52,7 +52,9 @@ export default function AddCatch({ route }) {
       const cloudURL = await postImageToCloudinary(formData.local_url);
       setFormData(formData.cloudinary_urls.push(cloudURL.url));
     }
-    postNewCatch(userID, formData);
+    await postNewCatch(userID, formData);
+    setShowMarker(false);
+    navigation.navigate('CatchLog')
   }
 
   function navToDash() {

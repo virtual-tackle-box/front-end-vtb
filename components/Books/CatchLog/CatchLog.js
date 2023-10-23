@@ -17,8 +17,7 @@ import PropTypes from 'prop-types';
 import { CatchLogStylesheet as styles } from './CatchLogStylesheet';
 
 export default function CatchLog() {
-  const [catches, setCatches] = useState([]);
-  const { userID } = useUserContext();
+  const { userID, catches, setCatches } = useUserContext();
 
   const navigation = useNavigation();
 
@@ -62,7 +61,7 @@ export default function CatchLog() {
         >
           <Text style={styles.delBtn}>X</Text>
         </TouchableOpacity>
-        {cloudinary_urls?.length && image}
+        {/* {cloudinary_urls?.length && image} */}
         <View>
           <Text>Species: {species}</Text>
           <Text>Weight: {weight}</Text>
