@@ -150,7 +150,7 @@ export default function UserMap({ setMarkerPosition }) {
 		],
 	};
 
-	const userMarker = location && (
+	const userMarker = !onWeb && location && (
 		<Marker
 			ref={markerRef}
 			coordinate={{
@@ -168,7 +168,7 @@ export default function UserMap({ setMarkerPosition }) {
 		</Marker>
 	);
 
-	const catchMarkerComponents =
+	const catchMarkerComponents = !onWeb &&
 		catchMarkers &&
 		catchMarkers.map((marker) => {
 			return (
