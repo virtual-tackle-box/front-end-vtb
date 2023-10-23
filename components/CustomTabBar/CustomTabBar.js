@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Pressable,
-  Dimensions,
-  Text,
-  TouchableWithoutFeedback
-} from 'react-native';
+import { View, Pressable, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { styles } from './CustomTabBarStylessheet';
@@ -110,4 +104,8 @@ TabBar.propTypes = {
     navigate: PropTypes.func.isRequired
   }),
   toggleForm: PropTypes.func.isRequired
+};
+
+useUserContext.propTypes = {
+  setShowMarker: PropTypes.func.isRequired
 };
