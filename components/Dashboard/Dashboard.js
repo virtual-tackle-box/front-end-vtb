@@ -12,12 +12,9 @@ export default function Dashboard() {
   const navigation = useNavigation();
 
   const [markerPosition, setMarkerPosition] = useState('');
-  console.log("Marker Position in Dash", markerPosition)
   function toggleForm() {
     const lat = markerPosition.latitude;
     const lon = markerPosition.longitude;
-    console.log("Lat in toggle", lat),
-    console.log("long in toggle",lon)
     navigation.navigate('AddCatch', { lat: lat, lon: lon });
   }
 
