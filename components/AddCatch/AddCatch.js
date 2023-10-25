@@ -13,12 +13,13 @@ import { useUserContext } from '../UserContext/UserContext';
 
 import { AddCatchStylesheet as styles } from './AddCatchStylesheet';
 
+import { useToast } from "react-native-toast-notifications";
+
 import PropTypes from 'prop-types';
 
 export default function AddCatch({ route }) {
   const navigation = useNavigation();
   const { lat, lon } = route.params;
-  console.log(route.params)
   const [formData, setFormData] = useState({
     spot_name: '',
     latitude: lat,
@@ -31,6 +32,8 @@ export default function AddCatch({ route }) {
     cloudinary_urls: []
   });
   const [error, setError] = useState('');
+
+  const toast = useToast();
 
   const { userID, setShowMarker } = useUserContext();
 
@@ -53,6 +56,7 @@ export default function AddCatch({ route }) {
       const cloudURL = await postImageToCloudinary(formData.local_url);
       setFormData(formData.cloudinary_urls.push(cloudURL.url));
     }
+    toast.show("Catch logged!", { type: 'success'})
     await postNewCatch(userID, formData);
     setShowMarker(false);
     navigation.navigate('CatchLog');
