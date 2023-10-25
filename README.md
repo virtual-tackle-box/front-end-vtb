@@ -11,13 +11,16 @@
    <span>Virtual Tackle Box (VTB) is a React Native iOS application designed for fishermen to store, manage, and view past catches, view those catches on an interactive map, and organize their lures in a virtual tackle box. Users can upload images from their mobile device both from the camera and from their photo gallery. Additionally, users can sign up for their own VTB account and opt in to receive SMS correspondence from VTB.</span>
 </div>
 
+## Preview
+
+https://github.com/virtual-tackle-box/front-end-vtb/assets/100454651/889ef4c5-7d4d-499a-817f-cbde63d014c5
+
 ## Installation
 These instructions will help you set up and run the VTB app on your iOS device or simulator.
 
 **Choice 1:** Using your iOS device to visit our deployed site in its intended environment. Download [Expo Go](https://apps.apple.com/ca/app/expo-go/id982107779) and then scan this QR code after making an account.
 
-![Expo QR Code](https://github.com/virtual-tackle-box/front-end-vtb/assets/100454651/9a11aa5b-1cf5-40b8-aabc-4c6f66d737dc)
-
+<img alt='Expo QR Code' src='https://github.com/virtual-tackle-box/front-end-vtb/assets/100454651/9a11aa5b-1cf5-40b8-aabc-4c6f66d737dc'  width=200/>
 
 **Choice 2:** Install VTB on your local machine. Before you begin, ensure you have the following tools and dependencies installed:
 
