@@ -12,7 +12,6 @@ export default function Dashboard() {
   const navigation = useNavigation();
 
   const [markerPosition, setMarkerPosition] = useState('');
-
   function toggleForm() {
     const lat = markerPosition.latitude;
     const lon = markerPosition.longitude;
