@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
 		height: 60,
 		position: "absolute",
 		bottom: 40,
-		right: 175,
+		right: 172,
 		borderRadius: 30,
 		alignItems: "center",
 		justifyContent: "center",
