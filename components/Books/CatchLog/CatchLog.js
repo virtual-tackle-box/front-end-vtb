@@ -43,8 +43,8 @@ export default function CatchLog() {
     const { id } = c;
     const { species, weight, length, spot_name, lure, cloudinary_urls } =
       c.attributes;
-
-    const image = (
+      
+    const image = cloudinary_urls.length === 0 ? null : (
       <View>
         <Image
           source={{ uri: cloudinary_urls?.[0] }}
@@ -61,7 +61,7 @@ export default function CatchLog() {
         >
           <Text style={styles.delBtn}>X</Text>
         </TouchableOpacity>
-        {/* {cloudinary_urls?.length && image} */}
+        {cloudinary_urls && image}
         <View>
           <Text>Species: {species}</Text>
           <Text>Weight: {weight}</Text>
