@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 export default function AddCatch({ route }) {
   const navigation = useNavigation();
   const { lat, lon } = route.params;
+  console.log(route.params)
   const [formData, setFormData] = useState({
     spot_name: '',
     latitude: lat,

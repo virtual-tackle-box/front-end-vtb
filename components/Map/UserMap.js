@@ -122,7 +122,7 @@ export default function UserMap({ setMarkerPosition }) {
 				latitude: location.coords.latitude,
 				longitude: location.coords.longitude,
 			};
-			setMarkerPosition(location);
+			setMarkerPosition(locObj);
 		}
 		getLocation();
 	}, []);
