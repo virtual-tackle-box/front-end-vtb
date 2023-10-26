@@ -12,7 +12,7 @@ import LureForm from "./LureForm/LureForm";
 import LureImage from "./lureiconNobackground.png";
 import { postNewLure } from "../../fetchCalls";
 import { useUserContext } from "../UserContext/UserContext";
-
+import { useToast } from "react-native-toast-notifications";
 import PropTypes from 'prop-types';
 
 export default function AddLure() {
@@ -24,7 +24,8 @@ export default function AddLure() {
 		color: "",
 		weight: "",
 	});
-	const {setShowMarker} = useUserContext();
+	const {setShowMarker, userID} = useUserContext();
+	const toast = useToast();
 
 	function updateForm(name, value) {
 		setFormData((prev) => {
@@ -49,12 +50,12 @@ export default function AddLure() {
 			setErrorMsg("Please fill out all fields.");
 			return;
 		}
-		setErrorMsg("");
+		
 
 		try {
 			setShowMarker(false);
-			const response = await postNewLure("userID", formData);
-			
+			const response = await postNewLure(userID, formData);
+			toast.show("Lure added!", { type: 'success', duration: 2000})
 			setErrorMsg("");
 			navigation.navigate("book");
 		} catch (error) {

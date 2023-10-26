@@ -13,5 +13,11 @@ export const AddCatchStylesheet = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#6ccc60',
     margin: 40
+  },
+
+  successToast: {
+    backgroundColor: 'lightgreen',
+    position: 'absolute',
+    top: 150,
   }
 });

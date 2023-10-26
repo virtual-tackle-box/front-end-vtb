@@ -56,8 +56,8 @@ export default function AddCatch({ route }) {
       const cloudURL = await postImageToCloudinary(formData.local_url);
       setFormData(formData.cloudinary_urls.push(cloudURL.url));
     }
-    toast.show("Catch logged!", { type: 'success'})
     await postNewCatch(userID, formData);
+    toast.show("Catch logged!", { type: 'success', duration: 2000})
     setShowMarker(false);
     navigation.navigate('CatchLog');
   }

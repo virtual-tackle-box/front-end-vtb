@@ -30,7 +30,7 @@ export default function AddFish({ formData, updateForm }) {
         label='Weight'
         placeholder='lb'
         style={styles.input}
-        value={formData.weight.toString()}
+        value={formData.weight}
         onChangeText={text => updateForm('weight', text)}
       />
 
@@ -42,7 +42,7 @@ export default function AddFish({ formData, updateForm }) {
         label='Length'
         placeholder='in'
         style={styles.input}
-        value={formData.length.toString()}
+        value={formData.length}
         onChangeText={text => updateForm('length', text)}
       />
     </View>
