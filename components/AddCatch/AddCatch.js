@@ -51,11 +51,12 @@ export default function AddCatch({ route }) {
       setError('Please fill out required form fields.');
       return;
     }
-
     if (formData.local_url.length) {
+      
       const cloudURL = await postImageToCloudinary(formData.local_url);
       setFormData(formData.cloudinary_urls.push(cloudURL.url));
     }
+    
     await postNewCatch(userID, formData);
     toast.show("Catch logged!", { type: 'success', duration: 2000})
     setShowMarker(false);
