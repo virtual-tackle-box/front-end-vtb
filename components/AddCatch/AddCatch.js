@@ -34,7 +34,7 @@ export default function AddCatch({ route }) {
     cloudinary_urls: []
   });
   const [error, setError] = useState('');
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const toast = useToast();
 
