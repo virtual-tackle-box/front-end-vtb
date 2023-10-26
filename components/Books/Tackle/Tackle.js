@@ -13,13 +13,14 @@ import { useUserContext } from '../../UserContext/UserContext';
 import { deleteLure } from '../../../fetchCalls';
 
 import { TackleStylesheet as styles } from './TackleStylesheet';
-
+import { useToast } from "react-native-toast-notifications";
 import PropTypes from 'prop-types';
 
 export default function CatchLog() {
   const [lures, setLures] = useState([]);
   const { userID } = useUserContext();
   const navigation = useNavigation();
+  const toast = useToast();
 
   async function fetchLures() {
     const lures = await getLures(userID);
@@ -31,8 +32,15 @@ export default function CatchLog() {
   }
 
   async function removeLure(id) {
+    try{
     const deletedLure = await deleteLure(userID, id);
+    toast.show("Lure removed!", { type: 'danger', duration: 2000})
     fetchLures();
+    } catch (error){
+      alert(error.message)
+    }
+
+    
   }
 
   useEffect(() => {
